@@ -163,8 +163,7 @@ export default function LandingPage() {
         </div>
         <Reveal delay={1000}>
           <LandingMedia
-            image="/media/hero-poster.jpg"
-            clip="hero.mp4"
+            image={`${IMAGE_FOLDER}hero.jpg`}
             alt="A morning table with coffee, a croissant and an open book"
             className="mt-14 aspect-[16/9]"
           />
