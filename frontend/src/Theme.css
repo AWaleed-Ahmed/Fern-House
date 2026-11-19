@@ -12,6 +12,7 @@
   --color-ink-muted: #5d655f;
   --color-paper: #fbf8f1;
   --color-card: #efeae0;
+  --color-band: #f4f0e7;
   --color-night: #16201c;
   --color-amber: #9a6b12;
   --color-danger: #a3352b;
@@ -64,6 +65,45 @@
   .btn:disabled {
     opacity: 0.45;
     cursor: not-allowed;
+  }
+  /* Filled pill: used once per screen, for the main action only. */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 11px 22px;
+    background: var(--color-forest);
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: background-color 150ms;
+  }
+  .btn-primary:hover {
+    background: #264c41;
+  }
+  /* Quiet pill for secondary actions such as "Learn more". */
+  .btn-neutral {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 11px 22px;
+    background: var(--color-card);
+    color: var(--color-ink);
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: background-color 150ms;
+  }
+  .btn-neutral:hover {
+    background: #e4ddcf;
+  }
+  /* The one tinted word inside a big headline. */
+  .accent-word {
+    color: var(--color-forest);
+    font-style: italic;
   }
   .btn-danger {
     border-color: var(--color-danger);
