@@ -13,6 +13,8 @@ package store.service;
  * @author Rehan Haider
  */
 public class ValidationException extends RuntimeException {
+    /** Version number for Java serialization. */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Creates the error with a message for the user.

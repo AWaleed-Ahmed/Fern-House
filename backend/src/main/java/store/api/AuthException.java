@@ -13,8 +13,10 @@ package store.api;
  * @author Rehan Haider
  */
 public class AuthException extends RuntimeException {
+    /** Version number for Java serialization. */
     private static final long serialVersionUID = 1L;
 
+    /** HTTP status code to send, 401 or 403. */
     private final int statusCode;
 
     /**
