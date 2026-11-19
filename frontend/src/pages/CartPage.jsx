@@ -103,7 +103,7 @@ export default function CartPage() {
       {cart.items.length === 0 ? (
         <div className="rounded-card bg-card p-10 text-center">
           <p className="mb-6 text-ink-muted">Your cart is empty.</p>
-          <Link to="/" className="btn">Browse the shop</Link>
+          <Link to="/shop" className="btn">Browse the shop</Link>
         </div>
       ) : (
         <section className="grid gap-8 lg:grid-cols-[1fr_340px]">
@@ -160,7 +160,7 @@ export default function CartPage() {
 
       {recommendations.length > 0 && (
         <section>
-          <SectionLabel title="Goes well with your picks" linkText="Shop all" linkTo="/" />
+          <SectionLabel title="Goes well with your picks" linkText="Shop all" linkTo="/shop" />
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {recommendations.map((product) => <ProductCard key={product.id} product={product} />)}
           </div>

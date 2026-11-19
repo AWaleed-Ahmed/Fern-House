@@ -60,7 +60,7 @@ export default function ProductPage() {
     <div className="grid gap-10 lg:grid-cols-2">
       <ProductImage product={product} className="aspect-square w-full rounded-card" />
       <div className="flex flex-col gap-6 lg:py-6">
-        <Link to="/" className="label text-forest hover:opacity-70">← Back to shop</Link>
+        <Link to="/shop" className="label text-forest hover:opacity-70">← Back to shop</Link>
         <span className="label text-forest">{product.category}</span>
         <h1 className="text-[48px] leading-none text-forest sm:text-[64px]">{product.name}</h1>
         <div className="flex items-center gap-4">

@@ -44,7 +44,7 @@ export default function OrdersPage() {
       {orders.length === 0 && !error && (
         <div className="rounded-card bg-card p-10 text-center">
           <p className="mb-6 text-ink-muted">You haven't ordered anything yet.</p>
-          <Link to="/" className="btn">Browse the shop</Link>
+          <Link to="/shop" className="btn">Browse the shop</Link>
         </div>
       )}
       <ul className="flex flex-col gap-4">

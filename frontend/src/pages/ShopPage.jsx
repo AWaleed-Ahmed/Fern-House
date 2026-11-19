@@ -1,33 +1,32 @@
 /*
- * File:    HomePage.jsx
+ * File:    ShopPage.jsx
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
- * Purpose: Shop front: hero, live name search (trie on the backend), categories and product grid.
+ * Purpose: The shop: live name search (trie on the backend), categories and product grid.
  */
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { apiRequest } from '../Api.js'
 import { useAuth } from '../AuthContext.jsx'
-import { STORE_NAME } from '../Config.js'
 import ProductCard from '../components/ProductCard.jsx'
 import SectionLabel from '../components/SectionLabel.jsx'
 
 const SEARCH_DELAY_MS = 200
-const HERO_IMAGE = '/images/hero.jpg'
 
 /**
- * The shop page.
+ * The shop page. A category can be picked from the URL, for example /shop?category=Bath.
  *
  * @returns {JSX.Element} the page
  */
-export default function HomePage() {
+export default function ShopPage() {
   const { user } = useAuth()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const [recommendations, setRecommendations] = useState([])
   const [search, setSearch] = useState('')
-  const [category, setCategory] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
-  const [hasHeroImage, setHasHeroImage] = useState(true)
+  const category = searchParams.get('category') || ''
 
   useEffect(() => {
     apiRequest('/categories').then(setCategories).catch(() => setCategories([]))
@@ -64,35 +63,19 @@ export default function HomePage() {
    */
   function chooseCategory(name) {
     setSearch('')
-    setCategory((current) => (current === name ? '' : name))
+    setSearchParams(category === name ? {} : { category: name })
   }
 
   return (
-    <div className="flex flex-col gap-16">
-      <section className="grid items-center gap-10 lg:grid-cols-2">
-        <div className="flex flex-col gap-6">
-          <span className="label text-forest">{STORE_NAME} · Est. 2026</span>
-          <h1 className="text-[56px] leading-[0.99] text-forest sm:text-[80px] xl:text-[104px]">
-            Good things for slow mornings
-          </h1>
-          <p className="max-w-[480px] text-[19px] leading-[1.35] tracking-[0.017em] text-ink">
-            A small, careful selection for the kitchen and the table. Search by name,
-            browse by category, and we'll suggest what goes well with what you've bought.
-          </p>
-        </div>
-        {hasHeroImage ? (
-          <img
-            src={HERO_IMAGE}
-            alt=""
-            onError={() => setHasHeroImage(false)}
-            className="aspect-[4/3] w-full rounded-card object-cover"
-          />
-        ) : (
-          <div className="aspect-[4/3] w-full rounded-card bg-forest-soft" />
-        )}
-      </section>
+    <div className="flex flex-col gap-14">
+      <div className="flex flex-col gap-4">
+        <span className="label text-forest">The collection</span>
+        <h1 className="text-[56px] leading-none text-forest sm:text-[80px]">
+          {category || 'Shop everything'}
+        </h1>
+      </div>
 
-      {recommendations.length > 0 && (
+      {recommendations.length > 0 && !category && !search && (
         <section>
           <SectionLabel title={`Picked for ${user.username}`} />
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -102,14 +85,16 @@ export default function HomePage() {
       )}
 
       <section>
-        <SectionLabel title="All products" />
+        <SectionLabel title={category ? `${category} products` : 'All products'} />
         <div className="mb-8 flex flex-col gap-4">
           <input
             type="search"
             value={search}
             onChange={(event) => {
               setSearch(event.target.value)
-              setCategory('')
+              if (category) {
+                setSearchParams({})
+              }
             }}
             placeholder="Search by name, for example “ap”"
             className="field max-w-[520px]"

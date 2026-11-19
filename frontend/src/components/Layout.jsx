@@ -50,7 +50,7 @@ export default function Layout() {
           </Link>
 
           <nav className="flex flex-wrap items-center gap-x-7 gap-y-2">
-            <NavLink to="/" end className={navClass}>Shop</NavLink>
+            <NavLink to="/shop" className={navClass}>Shop</NavLink>
             {user && <NavLink to="/orders" className={navClass}>Orders</NavLink>}
             {user?.admin && <NavLink to="/admin" className={navClass}>Admin</NavLink>}
             <NavLink to="/cart" className={navClass}>Cart ({cartCount})</NavLink>
@@ -73,7 +73,7 @@ export default function Layout() {
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 px-4 py-10 sm:px-8">
           <span className="font-display text-3xl font-light text-white">{STORE_NAME}</span>
           <div className="flex flex-wrap gap-7 text-[15px]">
-            <Link to="/" className="hover:text-white">Shop</Link>
+            <Link to="/shop" className="hover:text-white">Shop</Link>
             <Link to="/cart" className="hover:text-white">Cart</Link>
             <Link to="/orders" className="hover:text-white">Orders</Link>
           </div>
