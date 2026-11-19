@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Admin-only API routes for managing the inventory.
  */
+
+
 package store.api;
 
 import java.io.IOException;
@@ -17,6 +19,7 @@ import store.service.ProductService;
 import store.service.UserService;
 import store.service.ValidationException;
 
+
 /**
  * Handles /api/admin routes. Every route needs a user with "admin": true.
  * POST products adds an item, PUT products/{id} updates it,
@@ -26,7 +29,11 @@ import store.service.ValidationException;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class AdminHandler extends ApiHandler {
+
+
     private final ProductService productService;
     private final OrderService orderService;
 
@@ -37,7 +44,14 @@ public class AdminHandler extends ApiHandler {
      * @param productService the inventory service
      * @param orderService   the order service
      */
-    public AdminHandler(UserService userService, ProductService productService, OrderService orderService) {
+
+
+    public AdminHandler
+    (
+        UserService userService,
+        ProductService productService,
+        OrderService orderService
+    ) {
         super(userService);
         this.productService = productService;
         this.orderService = orderService;
@@ -51,29 +65,47 @@ public class AdminHandler extends ApiHandler {
      * @param parts    the path parts, for example ["admin", "products", "3"]
      * @throws IOException if the response can't be written
      */
+
+
     @Override
-    protected void route(HttpExchange exchange, String method, String[] parts) throws IOException {
+    protected void route
+    (
+        HttpExchange exchange,
+        String method,
+        String[] parts
+    ) throws IOException {
         requireAdmin(exchange);
         String section = parts.length > 1 ? parts[1] : "";
 
-        if (section.equals("orders") && method.equals("GET")) {
+        if (section.equals("orders") && method.equals("GET"))
+        {
             sendJson(exchange, 200, orderService.getAllOrders());
-        } else if (section.equals("products") && parts.length == 2 && method.equals("POST")) {
+        }
+        else if (section.equals("products") && parts.length == 2 && method.equals("POST"))
+        {
             JsonObject body = readBody(exchange);
             sendJson(exchange, 201, productService.addProduct(field(body, "name"), field(body, "category"),
                     field(body, "price"), field(body, "quantity"), field(body, "image")));
-        } else if (section.equals("products") && parts.length == 3 && method.equals("PUT")) {
+        }
+        else if (section.equals("products") && parts.length == 3 && method.equals("PUT"))
+        {
             JsonObject body = readBody(exchange);
             sendJson(exchange, 200, productService.updateProduct(parseId(parts[2]), field(body, "name"),
                     field(body, "category"), field(body, "price"), field(body, "quantity"), field(body, "image")));
-        } else if (section.equals("products") && parts.length == 4 && parts[3].equals("status")
-                && method.equals("PUT")) {
+        }
+        else if (section.equals("products") && parts.length == 4 && parts[3].equals("status")
+                && method.equals("PUT"))
+        {
             JsonObject body = readBody(exchange);
             sendJson(exchange, 200, productService.setStatus(parseId(parts[2]), parseStatus(field(body, "status"))));
-        } else if (section.equals("products") && parts.length == 3 && method.equals("DELETE")) {
+        }
+        else if (section.equals("products") && parts.length == 3 && method.equals("DELETE"))
+        {
             productService.deleteProduct(parseId(parts[2]));
             sendJson(exchange, 200, Map.of("ok", true));
-        } else {
+        }
+        else
+        {
             sendNotFound(exchange);
         }
     }
@@ -84,11 +116,21 @@ public class AdminHandler extends ApiHandler {
      * @param text the status name
      * @return the status
      */
-    private StockStatus parseStatus(String text) {
-        try {
+
+
+    private StockStatus parseStatus
+    (
+        String text
+    ) {
+        try
+        {
             return StockStatus.valueOf(text);
-        } catch (IllegalArgumentException | NullPointerException e) {
+        }
+        catch (IllegalArgumentException | NullPointerException e)
+        {
             throw new ValidationException("Status must be IN_STOCK, LOW_STOCK or OUT_OF_STOCK.");
         }
     }
 }
+
+

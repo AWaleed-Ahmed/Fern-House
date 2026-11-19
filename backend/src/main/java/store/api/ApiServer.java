@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Starts the HTTP server and connects each URL to its handler.
  */
+
+
 package store.api;
 
 import java.io.IOException;
@@ -16,6 +18,7 @@ import store.service.ProductService;
 import store.service.RecommendationService;
 import store.service.UserService;
 
+
 /**
  * The REST API server, built on the JDK's own HttpServer. It uses one
  * thread, so requests are handled one at a time and the data structures
@@ -24,7 +27,11 @@ import store.service.UserService;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class ApiServer {
+
+
     private final HttpServer server;
 
     /**
@@ -38,9 +45,17 @@ public class ApiServer {
      * @param recommendationService the recommendation service
      * @throws IOException if the port can't be opened
      */
-    public ApiServer(int port, UserService userService, ProductService productService,
-            CartService cartService, OrderService orderService,
-            RecommendationService recommendationService) throws IOException {
+
+
+    public ApiServer
+    (
+        int port,
+        UserService userService,
+        ProductService productService,
+        CartService cartService,
+        OrderService orderService,
+        RecommendationService recommendationService
+    ) throws IOException {
         server = HttpServer.create(new InetSocketAddress(port), 0);
 
         ProductHandler productHandler = new ProductHandler(userService, productService);
@@ -59,6 +74,8 @@ public class ApiServer {
     /**
      * Starts listening for requests.
      */
+
+
     public void start() {
         server.start();
     }
@@ -66,6 +83,8 @@ public class ApiServer {
     /**
      * Stops the server.
      */
+
+
     public void stop() {
         server.stop(0);
     }
@@ -75,7 +94,11 @@ public class ApiServer {
      *
      * @return the port
      */
+
+
     public int getPort() {
         return server.getAddress().getPort();
     }
 }
+
+

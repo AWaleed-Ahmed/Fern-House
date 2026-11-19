@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Entry point: copies the starter data, builds the services and starts the API.
  */
+
+
 package store;
 
 import java.io.IOException;
@@ -17,18 +19,31 @@ import store.service.ProductService;
 import store.service.RecommendationService;
 import store.service.UserService;
 
+
 /**
  * Starts the store backend.
  *
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public final class Main {
+
+
     /** Port the API listens on. */
+
+
     public static final int DEFAULT_PORT = 8080;
+
     /** Folder the live JSON data is kept in. */
+
+
     public static final String DATA_FOLDER = "data";
+
     /** Folder with the starter JSON files, copied into the data folder once. */
+
+
     public static final String SEED_FOLDER = "seed";
 
     private Main() {
@@ -40,7 +55,12 @@ public final class Main {
      * @param args optional: the port number
      * @throws IOException if the data can't be copied or the port can't be opened
      */
-    public static void main(String[] args) throws IOException {
+
+
+    public static void main
+    (
+        String[] args
+    ) throws IOException {
         int port = args.length > 0 ? Integer.parseInt(args[0]) : DEFAULT_PORT;
         Path dataFolder = Path.of(DATA_FOLDER);
         copySeedData(Path.of(SEED_FOLDER), dataFolder);
@@ -66,18 +86,29 @@ public final class Main {
      * @param dataFolder folder with the live data
      * @throws IOException if a file can't be copied
      */
-    static void copySeedData(Path seedFolder, Path dataFolder) throws IOException {
+
+
+    static void copySeedData
+    (
+        Path seedFolder, Path dataFolder
+    ) throws IOException {
         Files.createDirectories(dataFolder);
-        if (!Files.isDirectory(seedFolder)) {
+        if (!Files.isDirectory(seedFolder))
+        {
             return;
         }
-        try (var files = Files.list(seedFolder)) {
-            for (Path seedFile : (Iterable<Path>) files::iterator) {
+        try (var files = Files.list(seedFolder))
+        {
+            for (Path seedFile : (Iterable<Path>) files::iterator)
+            {
                 Path target = dataFolder.resolve(seedFile.getFileName());
-                if (!Files.exists(target)) {
+                if (!Files.exists(target))
+                {
                     Files.copy(seedFile, target);
                 }
             }
         }
     }
 }
+
+

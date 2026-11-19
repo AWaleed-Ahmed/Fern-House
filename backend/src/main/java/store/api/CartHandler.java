@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: API routes for the logged-in user's cart.
  */
+
+
 package store.api;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ import store.service.CartService;
 import store.service.ProductService;
 import store.service.UserService;
 
+
 /**
  * Handles /api/cart routes: GET the cart, POST to add an item,
  * PUT /{productId} to change a quantity, DELETE /{productId} to remove
@@ -29,7 +32,11 @@ import store.service.UserService;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class CartHandler extends ApiHandler {
+
+
     private final CartService cartService;
     private final ProductService productService;
 
@@ -40,7 +47,14 @@ public class CartHandler extends ApiHandler {
      * @param cartService    the cart service
      * @param productService used to add product details to the reply
      */
-    public CartHandler(UserService userService, CartService cartService, ProductService productService) {
+
+
+    public CartHandler
+    (
+        UserService userService,
+        CartService cartService,
+        ProductService productService
+    ) {
         super(userService);
         this.cartService = cartService;
         this.productService = productService;
@@ -54,26 +68,44 @@ public class CartHandler extends ApiHandler {
      * @param parts    the path parts, for example ["cart", "4"]
      * @throws IOException if the response can't be written
      */
+
+
     @Override
-    protected void route(HttpExchange exchange, String method, String[] parts) throws IOException {
+    protected void route
+    (
+        HttpExchange exchange,
+        String method,
+        String[] parts
+    ) throws IOException {
         User user = requireUser(exchange);
-        if (parts.length == 1 && method.equals("GET")) {
+        if (parts.length == 1 && method.equals("GET"))
+        {
             sendJson(exchange, 200, cartView(user));
-        } else if (parts.length == 1 && method.equals("POST")) {
+        }
+        else if (parts.length == 1 && method.equals("POST"))
+        {
             JsonObject body = readBody(exchange);
             cartService.addToCart(user, parseId(field(body, "productId")), field(body, "quantity"));
             sendJson(exchange, 200, cartView(user));
-        } else if (parts.length == 1 && method.equals("DELETE")) {
+        }
+        else if (parts.length == 1 && method.equals("DELETE"))
+        {
             cartService.clearCart(user);
             sendJson(exchange, 200, cartView(user));
-        } else if (parts.length == 2 && method.equals("PUT")) {
+        }
+        else if (parts.length == 2 && method.equals("PUT"))
+        {
             JsonObject body = readBody(exchange);
             cartService.updateItem(user, parseId(parts[1]), field(body, "quantity"));
             sendJson(exchange, 200, cartView(user));
-        } else if (parts.length == 2 && method.equals("DELETE")) {
+        }
+        else if (parts.length == 2 && method.equals("DELETE"))
+        {
             cartService.removeItem(user, parseId(parts[1]));
             sendJson(exchange, 200, cartView(user));
-        } else {
+        }
+        else
+        {
             sendNotFound(exchange);
         }
     }
@@ -85,11 +117,18 @@ public class CartHandler extends ApiHandler {
      * @param user the user whose cart it is
      * @return a map with items and total
      */
-    private Map<String, Object> cartView(User user) {
+
+
+    private Map<String, Object> cartView
+    (
+        User user
+    ) {
         List<Map<String, Object>> items = new ArrayList<>();
         double total = 0;
-        for (CartItem item : user.getCart()) {
-            if (productService.hasProduct(item.getProductId())) {
+        for (CartItem item : user.getCart())
+        {
+            if (productService.hasProduct(item.getProductId()))
+            {
                 Product product = productService.getProduct(item.getProductId());
                 Map<String, Object> line = new HashMap<>();
                 line.put("product", product);
@@ -105,3 +144,5 @@ public class CartHandler extends ApiHandler {
         return result;
     }
 }
+
+
