@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -35,7 +36,7 @@ import store.service.ValidationException;
  */
 public abstract class ApiHandler implements HttpHandler {
     /** Shared JSON converter. */
-    protected static final Gson GSON = new Gson();
+    protected static final Gson GSON = new GsonBuilder().disableHtmlEscaping().create();
 
     /** Gives access to the logged-in user. */
     protected final UserService userService;
