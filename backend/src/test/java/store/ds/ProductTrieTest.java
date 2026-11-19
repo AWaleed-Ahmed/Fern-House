@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Tests prefix search and removal in the product name trie.
  */
+
+
 package store.ds;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,18 +18,25 @@ import org.junit.jupiter.api.Test;
 
 import store.model.Product;
 
+
 /**
  * Tests for {@link ProductTrie}.
  *
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 class ProductTrieTest {
+
+
     private ProductTrie trie;
 
     /**
      * Fills a trie with four products before each test.
      */
+
+
     @BeforeEach
     void setUp() {
         trie = new ProductTrie();
@@ -38,6 +47,8 @@ class ProductTrieTest {
     }
 
     /** All products under the "a" node come back in A to Z order, any case. */
+
+
     @Test
     void prefixSearchIsSortedAndIgnoresCase() {
         List<Product> results = trie.searchByPrefix("AP");
@@ -48,18 +59,24 @@ class ProductTrieTest {
     }
 
     /** A prefix with no match gives an empty list. */
+
+
     @Test
     void unknownPrefixGivesEmptyList() {
         assertTrue(trie.searchByPrefix("zz").isEmpty());
     }
 
     /** An empty prefix returns every product. */
+
+
     @Test
     void emptyPrefixReturnsAll() {
         assertEquals(4, trie.getAllSorted().size());
     }
 
     /** Removing a product takes it out of search results. */
+
+
     @Test
     void removeProduct() {
         assertTrue(trie.remove("Apron", 2));
@@ -67,3 +84,5 @@ class ProductTrieTest {
         assertFalse(trie.remove("Apron", 2));
     }
 }
+
+

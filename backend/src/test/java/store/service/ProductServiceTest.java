@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Tests the inventory operations, including every case in the OEL brief.
  */
+
+
 package store.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,13 +21,18 @@ import store.data.JsonStorage;
 import store.model.Product;
 import store.model.StockStatus;
 
+
 /**
  * Tests for {@link ProductService}. Each test uses a fresh temporary data folder.
  *
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 class ProductServiceTest {
+
+
     @TempDir
     Path tempFolder;
 
@@ -34,12 +41,16 @@ class ProductServiceTest {
     /**
      * Creates a service with an empty inventory before each test.
      */
+
+
     @BeforeEach
     void setUp() {
         service = new ProductService(new JsonStorage(tempFolder));
     }
 
     /** Brief case: add a valid item, so the item is added. */
+
+
     @Test
     void addValidItem() {
         Product product = service.addProduct("Green Tea", "Drinks", "300", "12", "tea.jpg");
@@ -49,6 +60,8 @@ class ProductServiceTest {
     }
 
     /** Brief case: add an item with an empty name, so a validation message is shown. */
+
+
     @Test
     void addItemWithEmptyName() {
         ValidationException error = assertThrows(ValidationException.class,
@@ -57,6 +70,8 @@ class ProductServiceTest {
     }
 
     /** Brief case: add an item with a negative quantity, so an error is shown. */
+
+
     @Test
     void addItemWithNegativeQuantity() {
         ValidationException error = assertThrows(ValidationException.class,
@@ -65,6 +80,8 @@ class ProductServiceTest {
     }
 
     /** Brief case: add an item with a non-numeric quantity, so an error is shown. */
+
+
     @Test
     void addItemWithNonNumericQuantity() {
         ValidationException error = assertThrows(ValidationException.class,
@@ -73,6 +90,8 @@ class ProductServiceTest {
     }
 
     /** Brief case: view all items, so all items are displayed in A to Z order. */
+
+
     @Test
     void viewAllItems() {
         service.addProduct("Mug", "Kitchen", "500", "5", "");
@@ -84,12 +103,16 @@ class ProductServiceTest {
     }
 
     /** Brief case: view an empty inventory, so an empty list comes back. */
+
+
     @Test
     void viewEmptyInventory() {
         assertTrue(service.getAllProducts().isEmpty());
     }
 
     /** Brief case: update an existing item, so its details are updated. */
+
+
     @Test
     void updateExistingItem() {
         service.addProduct("Mug", "Kitchen", "500", "5", "");
@@ -102,6 +125,8 @@ class ProductServiceTest {
     }
 
     /** Brief case: update a non-existing item, so it is handled with a clear error. */
+
+
     @Test
     void updateNonExistingItem() {
         NotFoundException error = assertThrows(NotFoundException.class,
@@ -110,6 +135,8 @@ class ProductServiceTest {
     }
 
     /** Brief case: delete an existing item, so the item is removed. */
+
+
     @Test
     void deleteExistingItem() {
         service.addProduct("Mug", "Kitchen", "500", "5", "");
@@ -120,12 +147,16 @@ class ProductServiceTest {
     }
 
     /** Deleting an ID that doesn't exist gives a clear error. */
+
+
     @Test
     void deleteNonExistingItem() {
         assertThrows(NotFoundException.class, () -> service.deleteProduct(7));
     }
 
     /** The admin can set the status by hand. */
+
+
     @Test
     void setStatusByHand() {
         service.addProduct("Mug", "Kitchen", "500", "50", "");
@@ -133,6 +164,8 @@ class ProductServiceTest {
     }
 
     /** Status follows the quantity: 0 is out, up to the threshold is low. */
+
+
     @Test
     void statusFollowsQuantity() {
         assertEquals(StockStatus.OUT_OF_STOCK, service.addProduct("A", "X", "1", "0", "").getStatus());
@@ -143,6 +176,8 @@ class ProductServiceTest {
     }
 
     /** Products are saved to JSON and come back after a restart. */
+
+
     @Test
     void productsSurviveRestart() {
         service.addProduct("Mug", "Kitchen", "500", "5", "");
@@ -151,3 +186,5 @@ class ProductServiceTest {
         assertEquals(1, restarted.searchProducts("mu").size());
     }
 }
+
+

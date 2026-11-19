@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Tests accounts, the linked list cart, checkout and recommendations together.
  */
+
+
 package store.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,6 +27,7 @@ import store.model.Product;
 import store.model.StockStatus;
 import store.model.User;
 
+
 /**
  * Tests for {@link UserService}, {@link CartService}, {@link OrderService}
  * and {@link RecommendationService}.
@@ -32,7 +35,11 @@ import store.model.User;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 class CartAndOrderTest {
+
+
     @TempDir
     Path tempFolder;
 
@@ -47,6 +54,8 @@ class CartAndOrderTest {
     /**
      * Creates the services, four products and one customer before each test.
      */
+
+
     @BeforeEach
     void setUp() {
         storage = new JsonStorage(tempFolder);
@@ -64,6 +73,8 @@ class CartAndOrderTest {
     }
 
     /** Passwords are saved as a SHA-256 hash, never as plain text. */
+
+
     @Test
     void passwordIsHashed() {
         assertNotEquals("secret1", buyer.getPasswordHash());
@@ -71,6 +82,8 @@ class CartAndOrderTest {
     }
 
     /** Login works with the right password and fails with a wrong one. */
+
+
     @Test
     void loginChecksPassword() {
         String token = users.login("Rehan", "secret1");
@@ -81,6 +94,8 @@ class CartAndOrderTest {
     }
 
     /** A taken username can't be registered again, and new users are not admins. */
+
+
     @Test
     void registerRules() {
         assertThrows(ValidationException.class, () -> users.register("REHAN", "another1"));
@@ -90,6 +105,8 @@ class CartAndOrderTest {
     }
 
     /** Adding the same product twice increases its quantity instead of adding a second node. */
+
+
     @Test
     void addingSameProductMergesQuantity() {
         carts.addToCart(buyer, 1, "2");
@@ -101,6 +118,8 @@ class CartAndOrderTest {
     }
 
     /** Out of stock products and amounts above the stock are refused. */
+
+
     @Test
     void cartChecksStock() {
         assertThrows(ValidationException.class, () -> carts.addToCart(buyer, 3, "1"));
@@ -110,6 +129,8 @@ class CartAndOrderTest {
     }
 
     /** Items can be updated and removed from the linked list. */
+
+
     @Test
     void updateAndRemoveCartItems() {
         carts.addToCart(buyer, 1, "1");
@@ -123,6 +144,8 @@ class CartAndOrderTest {
     }
 
     /** Checkout reduces stock, updates the status, saves the order and empties the cart. */
+
+
     @Test
     void checkoutReducesStock() {
         carts.addToCart(buyer, 1, "2");
@@ -137,6 +160,8 @@ class CartAndOrderTest {
     }
 
     /** Checking out an empty cart gives a clear error. */
+
+
     @Test
     void checkoutEmptyCart() {
         ValidationException error = assertThrows(ValidationException.class, () -> orders.checkout(buyer));
@@ -144,6 +169,8 @@ class CartAndOrderTest {
     }
 
     /** Recommendations come from what other customers bought together, per user. */
+
+
     @Test
     void recommendationsUseGraph() {
         User other = users.register("abdullah", "secret2");
@@ -156,13 +183,16 @@ class CartAndOrderTest {
 
         List<Product> results = recommendations.recommendFor(buyer, 4);
         assertEquals("Mug", results.get(0).getName());
-        for (Product product : results) {
+        for (Product product : results)
+        {
             assertNotEquals(1, product.getId());
             assertNotEquals(StockStatus.OUT_OF_STOCK, product.getStatus());
         }
     }
 
     /** Orders and carts survive a restart, and the graph is rebuilt from orders.json. */
+
+
     @Test
     void dataSurvivesRestart() {
         carts.addToCart(buyer, 1, "1");
@@ -182,3 +212,5 @@ class CartAndOrderTest {
         assertEquals(1, recs2.getGraph().getWeight(1, 4));
     }
 }
+
+

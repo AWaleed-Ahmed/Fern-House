@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Tests edge weights and ranking in the recommendation graph.
  */
+
+
 package store.ds;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,15 +15,21 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+
 /**
  * Tests for {@link RecommendationGraph}.
  *
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 class RecommendationGraphTest {
 
+
     /** Products bought together get an edge in both directions. */
+
+
     @Test
     void orderCreatesEdgesBothWays() {
         RecommendationGraph graph = new RecommendationGraph();
@@ -32,6 +40,8 @@ class RecommendationGraphTest {
     }
 
     /** The product bought together most often is recommended first. */
+
+
     @Test
     void heaviestNeighbourComesFirst() {
         RecommendationGraph graph = new RecommendationGraph();
@@ -43,6 +53,8 @@ class RecommendationGraphTest {
     }
 
     /** Excluded products are never recommended, and the limit is respected. */
+
+
     @Test
     void excludeAndLimit() {
         RecommendationGraph graph = new RecommendationGraph();
@@ -52,3 +64,5 @@ class RecommendationGraphTest {
         assertTrue(results.get(0) == 3 || results.get(0) == 4);
     }
 }
+
+
