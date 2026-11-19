@@ -3,7 +3,10 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: One line in a cart or order: a product ID and how many units.
  */
+
+
 package store.model;
+
 
 /**
  * A product ID together with a quantity, used in carts and orders.
@@ -11,7 +14,11 @@ package store.model;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class CartItem {
+
+
     private int productId;
     private int quantity;
 
@@ -21,7 +28,12 @@ public class CartItem {
      * @param productId ID of the product
      * @param quantity  number of units
      */
-    public CartItem(int productId, int quantity) {
+
+
+    public CartItem
+    (
+        int productId, int quantity
+    ) {
         this.productId = productId;
         this.quantity = quantity;
     }
@@ -31,6 +43,8 @@ public class CartItem {
      *
      * @return the product ID
      */
+
+
     public int getProductId() {
         return productId;
     }
@@ -40,6 +54,8 @@ public class CartItem {
      *
      * @return the quantity
      */
+
+
     public int getQuantity() {
         return quantity;
     }
@@ -49,7 +65,14 @@ public class CartItem {
      *
      * @param quantity the new quantity
      */
-    public void setQuantity(int quantity) {
+
+
+    public void setQuantity
+    (
+        int quantity
+    ) {
         this.quantity = quantity;
     }
 }
+
+

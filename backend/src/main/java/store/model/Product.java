@@ -3,7 +3,10 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Represents one product in the store inventory.
  */
+
+
 package store.model;
+
 
 /**
  * One product in the inventory, with its stock quantity and status.
@@ -11,7 +14,11 @@ package store.model;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class Product {
+
+
     private int id;
     private String name;
     private String category;
@@ -30,7 +37,16 @@ public class Product {
      * @param quantity number of units in stock
      * @param image    image file name or URL
      */
-    public Product(int id, String name, String category, double price, int quantity, String image) {
+
+
+    public Product
+    (
+        int id,
+        String name, String category,
+        double price,
+        int quantity,
+        String image
+    ) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -45,6 +61,8 @@ public class Product {
      *
      * @return the ID
      */
+
+
     public int getId() {
         return id;
     }
@@ -54,7 +72,12 @@ public class Product {
      *
      * @param id the new ID
      */
-    public void setId(int id) {
+
+
+    public void setId
+    (
+        int id
+    ) {
         this.id = id;
     }
 
@@ -63,6 +86,8 @@ public class Product {
      *
      * @return the name
      */
+
+
     public String getName() {
         return name;
     }
@@ -72,7 +97,12 @@ public class Product {
      *
      * @param name the new name
      */
-    public void setName(String name) {
+
+
+    public void setName
+    (
+        String name
+    ) {
         this.name = name;
     }
 
@@ -81,6 +111,8 @@ public class Product {
      *
      * @return the category
      */
+
+
     public String getCategory() {
         return category;
     }
@@ -90,7 +122,12 @@ public class Product {
      *
      * @param category the new category
      */
-    public void setCategory(String category) {
+
+
+    public void setCategory
+    (
+        String category
+    ) {
         this.category = category;
     }
 
@@ -99,6 +136,8 @@ public class Product {
      *
      * @return the price
      */
+
+
     public double getPrice() {
         return price;
     }
@@ -108,7 +147,12 @@ public class Product {
      *
      * @param price the new price
      */
-    public void setPrice(double price) {
+
+
+    public void setPrice
+    (
+        double price
+    ) {
         this.price = price;
     }
 
@@ -117,6 +161,8 @@ public class Product {
      *
      * @return the quantity
      */
+
+
     public int getQuantity() {
         return quantity;
     }
@@ -126,7 +172,12 @@ public class Product {
      *
      * @param quantity the new quantity
      */
-    public void setQuantity(int quantity) {
+
+
+    public void setQuantity
+    (
+        int quantity
+    ) {
         this.quantity = quantity;
         this.status = StockStatus.fromQuantity(quantity);
     }
@@ -136,6 +187,8 @@ public class Product {
      *
      * @return the status
      */
+
+
     public StockStatus getStatus() {
         return status;
     }
@@ -145,7 +198,12 @@ public class Product {
      *
      * @param status the new status
      */
-    public void setStatus(StockStatus status) {
+
+
+    public void setStatus
+    (
+        StockStatus status
+    ) {
         this.status = status;
     }
 
@@ -154,6 +212,8 @@ public class Product {
      *
      * @return the image
      */
+
+
     public String getImage() {
         return image;
     }
@@ -163,7 +223,14 @@ public class Product {
      *
      * @param image the new image
      */
-    public void setImage(String image) {
+
+
+    public void setImage
+    (
+        String image
+    ) {
         this.image = image;
     }
 }
+
+

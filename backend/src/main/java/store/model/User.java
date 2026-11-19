@@ -3,9 +3,12 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: A customer or admin account saved in users.json.
  */
+
+
 package store.model;
 
 import java.util.LinkedList;
+
 
 /**
  * A user account. The admin flag in users.json gives a user admin rights.
@@ -14,7 +17,11 @@ import java.util.LinkedList;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class User {
+
+
     private String username;
     private String passwordHash;
     private boolean admin;
@@ -27,7 +34,13 @@ public class User {
      * @param passwordHash SHA-256 hash of the password
      * @param admin        true if this user is an admin
      */
-    public User(String username, String passwordHash, boolean admin) {
+
+
+    public User
+    (
+        String username, String passwordHash,
+        boolean admin
+    ) {
         this.username = username;
         this.passwordHash = passwordHash;
         this.admin = admin;
@@ -39,6 +52,8 @@ public class User {
      *
      * @return the username
      */
+
+
     public String getUsername() {
         return username;
     }
@@ -48,6 +63,8 @@ public class User {
      *
      * @return the SHA-256 hash
      */
+
+
     public String getPasswordHash() {
         return passwordHash;
     }
@@ -57,6 +74,8 @@ public class User {
      *
      * @return true for an admin
      */
+
+
     public boolean isAdmin() {
         return admin;
     }
@@ -67,10 +86,15 @@ public class User {
      *
      * @return the cart as a linked list
      */
+
+
     public LinkedList<CartItem> getCart() {
-        if (cart == null) {
+        if (cart == null)
+        {
             cart = new LinkedList<>();
         }
         return cart;
     }
 }
+
+

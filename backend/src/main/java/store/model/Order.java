@@ -3,9 +3,12 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: A finished checkout, saved in orders.json.
  */
+
+
 package store.model;
 
 import java.util.List;
+
 
 /**
  * A completed order. Orders are used to rebuild the recommendation graph.
@@ -13,7 +16,11 @@ import java.util.List;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class Order {
+
+
     private int id;
     private String username;
     private List<CartItem> items;
@@ -29,7 +36,16 @@ public class Order {
      * @param total    total price
      * @param date     date and time of the order
      */
-    public Order(int id, String username, List<CartItem> items, double total, String date) {
+
+
+    public Order
+    (
+        int id,
+        String username,
+        List<CartItem> items,
+        double total,
+        String date
+    ) {
         this.id = id;
         this.username = username;
         this.items = items;
@@ -42,6 +58,8 @@ public class Order {
      *
      * @return the ID
      */
+
+
     public int getId() {
         return id;
     }
@@ -51,6 +69,8 @@ public class Order {
      *
      * @return the username
      */
+
+
     public String getUsername() {
         return username;
     }
@@ -60,6 +80,8 @@ public class Order {
      *
      * @return the items
      */
+
+
     public List<CartItem> getItems() {
         return items;
     }
@@ -69,6 +91,8 @@ public class Order {
      *
      * @return the total
      */
+
+
     public double getTotal() {
         return total;
     }
@@ -78,7 +102,11 @@ public class Order {
      *
      * @return the date as text
      */
+
+
     public String getDate() {
         return date;
     }
 }
+
+
