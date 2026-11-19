@@ -1,0 +1,5 @@
+{
+  "java.project.sourcePaths": ["backend/src/main/java", "backend/src/test/java"],
+  "java.project.referencedLibraries": ["backend/lib/**/*.jar"],
+  "java.project.outputPath": "backend/out"
+}
