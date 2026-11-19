@@ -119,6 +119,16 @@ public class ProductService {
     }
 
     /**
+     * Checks if a product with this ID exists.
+     *
+     * @param id the product ID
+     * @return true if the product is in the inventory
+     */
+    public boolean hasProduct(int id) {
+        return catalog.findById(id) != null;
+    }
+
+    /**
      * Updates the details and quantity of an existing product.
      *
      * @param id       ID of the product to update

@@ -18,7 +18,6 @@ import store.model.CartItem;
 import store.model.Product;
 import store.model.User;
 import store.service.CartService;
-import store.service.NotFoundException;
 import store.service.ProductService;
 import store.service.UserService;
 
@@ -90,7 +89,7 @@ public class CartHandler extends ApiHandler {
         List<Map<String, Object>> items = new ArrayList<>();
         double total = 0;
         for (CartItem item : user.getCart()) {
-            try {
+            if (productService.hasProduct(item.getProductId())) {
                 Product product = productService.getProduct(item.getProductId());
                 Map<String, Object> line = new HashMap<>();
                 line.put("product", product);
@@ -98,8 +97,6 @@ public class CartHandler extends ApiHandler {
                 line.put("lineTotal", product.getPrice() * item.getQuantity());
                 items.add(line);
                 total += product.getPrice() * item.getQuantity();
-            } catch (NotFoundException e) {
-                // Product was deleted by the admin, so leave it out.
             }
         }
         Map<String, Object> result = new HashMap<>();

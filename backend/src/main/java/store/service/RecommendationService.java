@@ -109,24 +109,21 @@ public class RecommendationService {
     }
 
     /**
-     * Adds a product to the results if it still exists, is in stock, and is
-     * not excluded or already in the list.
+     * Adds a product to the results if it still exists (it may have been
+     * deleted after it was bought), is in stock, and is not excluded or
+     * already in the list.
      *
      * @param results the result list
      * @param exclude IDs to skip (bought or in the cart)
      * @param id      the product ID
      */
     private void addIfAvailable(List<Product> results, Set<Integer> exclude, int id) {
-        if (exclude.contains(id)) {
+        if (exclude.contains(id) || !productService.hasProduct(id)) {
             return;
         }
-        try {
-            Product product = productService.getProduct(id);
-            if (!results.contains(product) && product.getStatus() != StockStatus.OUT_OF_STOCK) {
-                results.add(product);
-            }
-        } catch (NotFoundException e) {
-            // The product was deleted after it was bought, so skip it.
+        Product product = productService.getProduct(id);
+        if (!results.contains(product) && product.getStatus() != StockStatus.OUT_OF_STOCK) {
+            results.add(product);
         }
     }
 
@@ -137,10 +134,9 @@ public class RecommendationService {
      * @return the category
      */
     private String safeCategory(int id) {
-        try {
-            return productService.getProduct(id).getCategory();
-        } catch (NotFoundException e) {
+        if (!productService.hasProduct(id)) {
             return "";
         }
+        return productService.getProduct(id).getCategory();
     }
 }
