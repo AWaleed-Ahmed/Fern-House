@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "name": "Acacia Cutting Board",
+    "category": "Kitchen",
+    "price": 2400.0,
+    "quantity": 14,
+    "status": "IN_STOCK",
+    "image": "acacia-cutting-board.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Cast Iron Skillet",
+    "category": "Kitchen",
+    "price": 6500.0,
+    "quantity": 6,
+    "status": "IN_STOCK",
+    "image": "cast-iron-skillet.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Copper Measuring Cups",
+    "category": "Kitchen",
+    "price": 3200.0,
+    "quantity": 4,
+    "status": "LOW_STOCK",
+    "image": "copper-measuring-cups.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Enamel Saucepan",
+    "category": "Kitchen",
+    "price": 4800.0,
+    "quantity": 9,
+    "status": "IN_STOCK",
+    "image": "enamel-saucepan.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Linen Apron",
+    "category": "Kitchen",
+    "price": 2200.0,
+    "quantity": 18,
+    "status": "IN_STOCK",
+    "image": "linen-apron.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Marble Mortar and Pestle",
+    "category": "Kitchen",
+    "price": 3900.0,
+    "quantity": 0,
+    "status": "OUT_OF_STOCK",
+    "image": "marble-mortar-and-pestle.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Olive Wood Spoon Set",
+    "category": "Kitchen",
+    "price": 1800.0,
+    "quantity": 25,
+    "status": "IN_STOCK",
+    "image": "olive-wood-spoon-set.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Speckled Dinner Plate",
+    "category": "Tableware",
+    "price": 1500.0,
+    "quantity": 40,
+    "status": "IN_STOCK",
+    "image": "speckled-dinner-plate.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Stoneware Pasta Bowl",
+    "category": "Tableware",
+    "price": 1700.0,
+    "quantity": 30,
+    "status": "IN_STOCK",
+    "image": "stoneware-pasta-bowl.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Hand Thrown Mug",
+    "category": "Tableware",
+    "price": 1200.0,
+    "quantity": 35,
+    "status": "IN_STOCK",
+    "image": "hand-thrown-mug.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Ribbed Glass Tumbler",
+    "category": "Tableware",
+    "price": 900.0,
+    "quantity": 3,
+    "status": "LOW_STOCK",
+    "image": "ribbed-glass-tumbler.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Brass Cutlery Set",
+    "category": "Tableware",
+    "price": 7800.0,
+    "quantity": 7,
+    "status": "IN_STOCK",
+    "image": "brass-cutlery-set.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Ceramic Serving Platter",
+    "category": "Tableware",
+    "price": 3600.0,
+    "quantity": 11,
+    "status": "IN_STOCK",
+    "image": "ceramic-serving-platter.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Walnut Salad Servers",
+    "category": "Tableware",
+    "price": 2100.0,
+    "quantity": 0,
+    "status": "OUT_OF_STOCK",
+    "image": "walnut-salad-servers.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Pour Over Coffee Dripper",
+    "category": "Coffee & Tea",
+    "price": 2600.0,
+    "quantity": 12,
+    "status": "IN_STOCK",
+    "image": "pour-over-coffee-dripper.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Glass Teapot",
+    "category": "Coffee & Tea",
+    "price": 3400.0,
+    "quantity": 8,
+    "status": "IN_STOCK",
+    "image": "glass-teapot.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Hand Coffee Grinder",
+    "category": "Coffee & Tea",
+    "price": 5900.0,
+    "quantity": 5,
+    "status": "LOW_STOCK",
+    "image": "hand-coffee-grinder.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Matcha Whisk Set",
+    "category": "Coffee & Tea",
+    "price": 2800.0,
+    "quantity": 10,
+    "status": "IN_STOCK",
+    "image": "matcha-whisk-set.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Gooseneck Kettle",
+    "category": "Coffee & Tea",
+    "price": 7200.0,
+    "quantity": 2,
+    "status": "LOW_STOCK",
+    "image": "gooseneck-kettle.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Loose Leaf Tea Tin",
+    "category": "Coffee & Tea",
+    "price": 1100.0,
+    "quantity": 45,
+    "status": "IN_STOCK",
+    "image": "loose-leaf-tea-tin.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Espresso Cup Pair",
+    "category": "Coffee & Tea",
+    "price": 1900.0,
+    "quantity": 16,
+    "status": "IN_STOCK",
+    "image": "espresso-cup-pair.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Waffle Cotton Throw",
+    "category": "Textiles",
+    "price": 5400.0,
+    "quantity": 9,
+    "status": "IN_STOCK",
+    "image": "waffle-cotton-throw.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Linen Table Runner",
+    "category": "Textiles",
+    "price": 2900.0,
+    "quantity": 13,
+    "status": "IN_STOCK",
+    "image": "linen-table-runner.jpg"
+  },
+  {
+    "id": 24,
+    "name": "Stonewashed Napkin Set",
+    "category": "Textiles",
+    "price": 2300.0,
+    "quantity": 20,
+    "status": "IN_STOCK",
+    "image": "stonewashed-napkin-set.jpg"
+  },
+  {
+    "id": 25,
+    "name": "Wool Cushion Cover",
+    "category": "Textiles",
+    "price": 2700.0,
+    "quantity": 4,
+    "status": "LOW_STOCK",
+    "image": "wool-cushion-cover.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Jute Floor Rug",
+    "category": "Textiles",
+    "price": 9800.0,
+    "quantity": 3,
+    "status": "LOW_STOCK",
+    "image": "jute-floor-rug.jpg"
+  },
+  {
+    "id": 27,
+    "name": "Cotton Tea Towel Pair",
+    "category": "Textiles",
+    "price": 1300.0,
+    "quantity": 32,
+    "status": "IN_STOCK",
+    "image": "cotton-tea-towel-pair.jpg"
+  },
+  {
+    "id": 28,
+    "name": "Cedar and Moss Candle",
+    "category": "Candles & Scent",
+    "price": 2500.0,
+    "quantity": 22,
+    "status": "IN_STOCK",
+    "image": "cedar-and-moss-candle.jpg"
+  },
+  {
+    "id": 29,
+    "name": "Fig Leaf Candle",
+    "category": "Candles & Scent",
+    "price": 2500.0,
+    "quantity": 0,
+    "status": "OUT_OF_STOCK",
+    "image": "fig-leaf-candle.jpg"
+  },
+  {
+    "id": 30,
+    "name": "Reed Diffuser",
+    "category": "Candles & Scent",
+    "price": 3100.0,
+    "quantity": 15,
+    "status": "IN_STOCK",
+    "image": "reed-diffuser.jpg"
+  },
+  {
+    "id": 31,
+    "name": "Beeswax Taper Pair",
+    "category": "Candles & Scent",
+    "price": 1400.0,
+    "quantity": 28,
+    "status": "IN_STOCK",
+    "image": "beeswax-taper-pair.jpg"
+  },
+  {
+    "id": 32,
+    "name": "Incense Holder",
+    "category": "Candles & Scent",
+    "price": 900.0,
+    "quantity": 5,
+    "status": "LOW_STOCK",
+    "image": "incense-holder.jpg"
+  },
+  {
+    "id": 33,
+    "name": "Brass Candle Snuffer",
+    "category": "Candles & Scent",
+    "price": 1600.0,
+    "quantity": 10,
+    "status": "IN_STOCK",
+    "image": "brass-candle-snuffer.jpg"
+  },
+  {
+    "id": 34,
+    "name": "Seagrass Basket",
+    "category": "Storage",
+    "price": 3300.0,
+    "quantity": 12,
+    "status": "IN_STOCK",
+    "image": "seagrass-basket.jpg"
+  },
+  {
+    "id": 35,
+    "name": "Glass Storage Jar",
+    "category": "Storage",
+    "price": 1200.0,
+    "quantity": 38,
+    "status": "IN_STOCK",
+    "image": "glass-storage-jar.jpg"
+  },
+  {
+    "id": 36,
+    "name": "Oak Bread Bin",
+    "category": "Storage",
+    "price": 6200.0,
+    "quantity": 4,
+    "status": "LOW_STOCK",
+    "image": "oak-bread-bin.jpg"
+  },
+  {
+    "id": 37,
+    "name": "Woven Laundry Hamper",
+    "category": "Storage",
+    "price": 5600.0,
+    "quantity": 7,
+    "status": "IN_STOCK",
+    "image": "woven-laundry-hamper.jpg"
+  },
+  {
+    "id": 38,
+    "name": "Stackable Pantry Tins",
+    "category": "Storage",
+    "price": 2900.0,
+    "quantity": 0,
+    "status": "OUT_OF_STOCK",
+    "image": "stackable-pantry-tins.jpg"
+  },
+  {
+    "id": 39,
+    "name": "Leather Key Tray",
+    "category": "Storage",
+    "price": 1700.0,
+    "quantity": 19,
+    "status": "IN_STOCK",
+    "image": "leather-key-tray.jpg"
+  },
+  {
+    "id": 40,
+    "name": "Stoneware Bud Vase",
+    "category": "Decor",
+    "price": 1600.0,
+    "quantity": 24,
+    "status": "IN_STOCK",
+    "image": "stoneware-bud-vase.jpg"
+  },
+  {
+    "id": 41,
+    "name": "Dried Pampas Bunch",
+    "category": "Decor",
+    "price": 1900.0,
+    "quantity": 3,
+    "status": "LOW_STOCK",
+    "image": "dried-pampas-bunch.jpg"
+  },
+  {
+    "id": 42,
+    "name": "Round Wall Mirror",
+    "category": "Decor",
+    "price": 8900.0,
+    "quantity": 5,
+    "status": "LOW_STOCK",
+    "image": "round-wall-mirror.jpg"
+  },
+  {
+    "id": 43,
+    "name": "Terracotta Planter",
+    "category": "Decor",
+    "price": 2200.0,
+    "quantity": 17,
+    "status": "IN_STOCK",
+    "image": "terracotta-planter.jpg"
+  },
+  {
+    "id": 44,
+    "name": "Linen Lampshade",
+    "category": "Decor",
+    "price": 4300.0,
+    "quantity": 8,
+    "status": "IN_STOCK",
+    "image": "linen-lampshade.jpg"
+  },
+  {
+    "id": 45,
+    "name": "Botanical Print",
+    "category": "Decor",
+    "price": 3500.0,
+    "quantity": 11,
+    "status": "IN_STOCK",
+    "image": "botanical-print.jpg"
+  },
+  {
+    "id": 46,
+    "name": "Turkish Cotton Towel",
+    "category": "Bath",
+    "price": 3800.0,
+    "quantity": 21,
+    "status": "IN_STOCK",
+    "image": "turkish-cotton-towel.jpg"
+  },
+  {
+    "id": 47,
+    "name": "Ceramic Soap Dish",
+    "category": "Bath",
+    "price": 900.0,
+    "quantity": 27,
+    "status": "IN_STOCK",
+    "image": "ceramic-soap-dish.jpg"
+  },
+  {
+    "id": 48,
+    "name": "Bamboo Bath Mat",
+    "category": "Bath",
+    "price": 2600.0,
+    "quantity": 6,
+    "status": "IN_STOCK",
+    "image": "bamboo-bath-mat.jpg"
+  },
+  {
+    "id": 49,
+    "name": "Olive Oil Soap Bar",
+    "category": "Bath",
+    "price": 700.0,
+    "quantity": 50,
+    "status": "IN_STOCK",
+    "image": "olive-oil-soap-bar.jpg"
+  },
+  {
+    "id": 50,
+    "name": "Glass Soap Dispenser",
+    "category": "Bath",
+    "price": 1500.0,
+    "quantity": 2,
+    "status": "LOW_STOCK",
+    "image": "glass-soap-dispenser.jpg"
+  }
+]
