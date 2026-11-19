@@ -1,11 +1,11 @@
 /*
  * File:    LandingMedia.jsx
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
- * Purpose: A big picture slot on the landing page: a looping video if one is set, otherwise a photo.
+ * Purpose: A big picture slot on the landing page: a looping clip (GIF or video) if set, otherwise a photo.
  */
 import { useState } from 'react'
 
-/** Folder (inside public/) that landing page videos are served from. */
+/** Folder (inside public/) that landing page clips are served from. */
 export const MEDIA_FOLDER = '/media/'
 
 /**
@@ -22,34 +22,41 @@ function prefersReducedMotion() {
 }
 
 /**
- * Shows a muted looping video, falling back to a photo when there is no
- * video, the video fails to load, or the visitor prefers less motion.
+ * Shows a looping clip, falling back to a photo when there is no clip, the
+ * clip file is missing, or the visitor prefers less motion. GIFs are shown as
+ * images; MP4 and WebM files as muted looping videos.
  *
  * @param {object} props
- * @param {string} [props.video]     video file name in public/media/, for example "hero.mp4"
- * @param {string} props.image       photo path used as poster and fallback, for example "/images/hero.jpg"
+ * @param {string} [props.clip]      clip file name in public/media/, for example "hero.gif"
+ * @param {string} props.image       photo path used as fallback, for example "/images/hero.jpg"
  * @param {string} [props.alt]       description of the picture
- * @param {string} [props.className] extra classes, for example an aspect ratio
- * @returns {JSX.Element} the video or image
+ * @param {string} [props.className] extra classes for the frame, for example an aspect ratio
+ * @returns {JSX.Element} the framed clip or photo
  */
-export default function LandingMedia({ video, image, alt = '', className = '' }) {
-  const [hasVideoFailed, setHasVideoFailed] = useState(false)
-  const frame = `w-full overflow-hidden rounded-[28px] bg-card object-cover ${className}`
+export default function LandingMedia({ clip, image, alt = '', className = '' }) {
+  const [hasClipFailed, setHasClipFailed] = useState(false)
+  const useClip = clip && !hasClipFailed && !prefersReducedMotion()
+  const media = 'zoom-media h-full w-full object-cover'
 
-  if (video && !hasVideoFailed && !prefersReducedMotion()) {
-    return (
+  let content
+  if (useClip && clip.toLowerCase().endsWith('.gif')) {
+    content = <img className={media} src={MEDIA_FOLDER + clip} alt={alt} onError={() => setHasClipFailed(true)} />
+  } else if (useClip) {
+    content = (
       <video
-        className={frame}
-        src={MEDIA_FOLDER + video}
+        className={media}
+        src={MEDIA_FOLDER + clip}
         poster={image}
         autoPlay
         muted
         loop
         playsInline
         aria-label={alt}
-        onError={() => setHasVideoFailed(true)}
+        onError={() => setHasClipFailed(true)}
       />
     )
+  } else {
+    content = <img className={media} src={image} alt={alt} loading="lazy" />
   }
-  return <img className={frame} src={image} alt={alt} loading="lazy" />
+  return <div className={`w-full overflow-hidden rounded-[28px] bg-card ${className}`}>{content}</div>
 }
