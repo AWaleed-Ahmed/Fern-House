@@ -127,5 +127,3 @@ public final class Validator {
         return price;
     }
 }
-
-

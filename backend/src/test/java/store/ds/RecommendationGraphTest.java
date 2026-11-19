@@ -64,5 +64,3 @@ class RecommendationGraphTest {
         assertTrue(results.get(0) == 3 || results.get(0) == 4);
     }
 }
-
-

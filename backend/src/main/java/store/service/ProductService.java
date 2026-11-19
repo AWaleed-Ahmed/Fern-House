@@ -275,5 +275,3 @@ public class ProductService {
         storage.saveList(PRODUCTS_FILE, new ArrayList<>(catalog.getAll()));
     }
 }
-
-

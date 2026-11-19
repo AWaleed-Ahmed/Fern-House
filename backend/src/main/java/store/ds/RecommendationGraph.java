@@ -124,5 +124,3 @@ public class RecommendationGraph {
         return ranked.subList(0, Math.min(limit, ranked.size()));
     }
 }
-
-

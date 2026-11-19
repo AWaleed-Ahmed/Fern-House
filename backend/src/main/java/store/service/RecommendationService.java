@@ -191,5 +191,3 @@ public class RecommendationService {
         return productService.getProduct(id).getCategory();
     }
 }
-
-

@@ -186,5 +186,3 @@ class ProductServiceTest {
         assertEquals(1, restarted.searchProducts("mu").size());
     }
 }
-
-

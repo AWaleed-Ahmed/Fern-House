@@ -96,5 +96,3 @@ public class User {
         return cart;
     }
 }
-
-

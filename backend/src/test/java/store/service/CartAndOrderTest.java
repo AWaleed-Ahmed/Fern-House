@@ -212,5 +212,3 @@ class CartAndOrderTest {
         assertEquals(1, recs2.getGraph().getWeight(1, 4));
     }
 }
-
-

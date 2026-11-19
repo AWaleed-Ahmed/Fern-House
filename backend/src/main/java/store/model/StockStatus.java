@@ -89,5 +89,3 @@ public enum StockStatus {
         return IN_STOCK;
     }
 }
-
-

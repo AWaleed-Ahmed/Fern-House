@@ -176,5 +176,3 @@ public class UserService {
         storage.saveList(USERS_FILE, new ArrayList<>(usersByName.values()));
     }
 }
-
-

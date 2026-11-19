@@ -162,5 +162,3 @@ public class ProductCatalog {
         return productsById.size();
     }
 }
-
-

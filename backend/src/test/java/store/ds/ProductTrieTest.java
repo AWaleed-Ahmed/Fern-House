@@ -84,5 +84,3 @@ class ProductTrieTest {
         assertFalse(trie.remove("Apron", 2));
     }
 }
-
-

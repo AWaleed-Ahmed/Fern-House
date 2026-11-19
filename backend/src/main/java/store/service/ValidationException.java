@@ -39,5 +39,3 @@ public class ValidationException extends RuntimeException {
         super(message);
     }
 }
-
-
