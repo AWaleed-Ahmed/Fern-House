@@ -163,8 +163,8 @@ export default function LandingPage() {
         </div>
         <Reveal delay={1000}>
           <LandingMedia
-            image={`${IMAGE_FOLDER}hero.jpg`}
-            clip="hero.gif"
+            image="/media/hero-poster.jpg"
+            clip="hero.mp4"
             alt="A morning table with coffee, a croissant and an open book"
             className="mt-14 aspect-[16/9]"
           />
@@ -195,7 +195,7 @@ export default function LandingPage() {
       <Band>
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <LandingMedia image={`${IMAGE_FOLDER}gooseneck-kettle.jpg`} clip="brew.gif" alt="Water pouring from a gooseneck kettle" className="aspect-square" />
+            <LandingMedia image="/media/brew-poster.jpg" clip="brew.mp4" alt="Water pouring from a gooseneck kettle" className="aspect-video" />
           </Reveal>
           <Reveal delay={STAGGER_MS * 2} className="flex flex-col gap-5">
             <span className="label text-forest">Coffee & Tea</span>
@@ -225,7 +225,7 @@ export default function LandingPage() {
             </Link>
           </Reveal>
           <Reveal className="order-1 lg:order-2">
-            <LandingMedia image={`${IMAGE_FOLDER}fig-leaf-candle.jpg`} clip="candle.gif" alt="A candle flame flickering" className="aspect-square" />
+            <LandingMedia image="/media/candle-poster.jpg" clip="candle.mp4" alt="A candle flame flickering" className="aspect-video" />
           </Reveal>
         </div>
       </Band>
