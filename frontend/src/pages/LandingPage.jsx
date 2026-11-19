@@ -9,6 +9,7 @@ import { apiRequest } from '../Api.js'
 import { useAuth } from '../AuthContext.jsx'
 import { formatPrice, IMAGE_FOLDER } from '../Config.js'
 import LandingMedia from '../components/LandingMedia.jsx'
+import Reveal from '../components/Reveal.jsx'
 
 /** Products shown as large feature cards in "The highlights". */
 const HIGHLIGHTS = [
@@ -34,6 +35,18 @@ const HIGHLIGHTS = [
     image: 'waffle-cotton-throw.jpg',
   },
 ]
+
+/** Words of the hero headline; each one rises in after the one before. */
+const HERO_WORDS = [
+  { text: 'Made' },
+  { text: 'slowly.' },
+  { text: 'Lived', isAccent: true },
+  { text: 'in' },
+  { text: 'daily.' },
+]
+
+/** Milliseconds between each staggered item. */
+const STAGGER_MS = 110
 
 /** One photo for each category tile. */
 const CATEGORY_IMAGES = {
@@ -83,7 +96,11 @@ function Band({ isTinted = false, id, children }) {
  * @returns {JSX.Element} the headline
  */
 function Headline({ children, size = 'text-[44px] sm:text-[56px] lg:text-[64px]' }) {
-  return <h2 className={`${size} leading-[1.04] text-ink`}>{children}</h2>
+  return (
+    <Reveal>
+      <h2 className={`${size} leading-[1.04] text-ink`}>{children}</h2>
+    </Reveal>
+  )
 }
 
 /**
@@ -110,14 +127,31 @@ export default function LandingPage() {
     <div>
       <Band>
         <div className="flex flex-col gap-7">
-          <span className="label text-forest">Fernhouse · Home collection 2026</span>
-          <h1 className="max-w-[1000px] text-[56px] leading-[1.0] text-ink sm:text-[84px] lg:text-[104px]">
-            Made slowly. <span className="accent-word">Lived</span> in daily.
-          </h1>
-          <p className="max-w-[560px] text-[19px] leading-[1.45] text-ink-muted">
-            Calm, well-made things for the kitchen, the table and the quiet corners of your home.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
+          <Reveal>
+            <span className="label text-forest">Fernhouse · Home collection 2026</span>
+          </Reveal>
+          <Reveal className="!transform-none">
+            <h1 className="max-w-[1000px] text-[56px] leading-[1.0] text-ink sm:text-[84px] lg:text-[104px]">
+              {HERO_WORDS.map((word, index) => (
+                <span key={word.text}>
+                  <span className="rise-word">
+                    <span
+                      className={word.isAccent ? 'accent-word pr-[0.08em]' : ''}
+                      style={{ transitionDelay: `${150 + index * STAGGER_MS}ms` }}
+                    >
+                      {word.text}
+                    </span>
+                  </span>{' '}
+                </span>
+              ))}
+            </h1>
+          </Reveal>
+          <Reveal delay={700}>
+            <p className="max-w-[560px] text-[19px] leading-[1.45] text-ink-muted">
+              Calm, well-made things for the kitchen, the table and the quiet corners of your home.
+            </p>
+          </Reveal>
+          <Reveal delay={850} className="flex flex-wrap items-center gap-4">
             {stats && (
               <span className="text-[15px] text-ink">
                 From {formatPrice(stats.lowestPrice)} · {stats.count} pieces
@@ -125,21 +159,24 @@ export default function LandingPage() {
             )}
             <Link to="/shop" className="btn-primary">Shop the collection</Link>
             <a href="#categories" className="btn-neutral">Browse rooms</a>
-          </div>
+          </Reveal>
         </div>
-        <LandingMedia
-          image={`${IMAGE_FOLDER}hero.jpg`}
-          video=""
-          alt="A morning table with coffee, a croissant and an open book"
-          className="mt-14 aspect-[16/9]"
-        />
+        <Reveal delay={1000}>
+          <LandingMedia
+            image={`${IMAGE_FOLDER}hero.jpg`}
+            clip="hero.gif"
+            alt="A morning table with coffee, a croissant and an open book"
+            className="mt-14 aspect-[16/9]"
+          />
+        </Reveal>
       </Band>
 
       <Band isTinted>
         <Headline>The <span className="accent-word">highlights</span>.</Headline>
         <div className="mt-12 flex flex-col gap-6">
-          {HIGHLIGHTS.map((item) => (
-            <article key={item.productId} className="grid gap-8 rounded-[28px] bg-paper p-5 sm:p-7 lg:grid-cols-[2fr_1fr] lg:items-center">
+          {HIGHLIGHTS.map((item, index) => (
+            <Reveal key={item.productId} delay={index * STAGGER_MS}>
+            <article className="grid gap-8 rounded-[28px] bg-paper p-5 sm:p-7 lg:grid-cols-[2fr_1fr] lg:items-center">
               <LandingMedia image={IMAGE_FOLDER + item.image} alt={item.title} className="aspect-[4/3]" />
               <div className="flex flex-col gap-3 lg:pr-4">
                 <span className="label text-forest">{item.kicker}</span>
@@ -150,14 +187,17 @@ export default function LandingPage() {
                 </Link>
               </div>
             </article>
+            </Reveal>
           ))}
         </div>
       </Band>
 
       <Band>
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <LandingMedia image={`${IMAGE_FOLDER}gooseneck-kettle.jpg`} video="" alt="A gooseneck kettle on a glass shelf" className="aspect-square" />
-          <div className="flex flex-col gap-5">
+          <Reveal>
+            <LandingMedia image={`${IMAGE_FOLDER}gooseneck-kettle.jpg`} clip="brew.gif" alt="Water pouring from a gooseneck kettle" className="aspect-square" />
+          </Reveal>
+          <Reveal delay={STAGGER_MS * 2} className="flex flex-col gap-5">
             <span className="label text-forest">Coffee & Tea</span>
             <Headline>Brewed <span className="accent-word">slowly</span>.</Headline>
             <p className="max-w-[440px] text-[17px] leading-[1.47] text-ink-muted">
@@ -167,13 +207,13 @@ export default function LandingPage() {
             <Link to={`/shop?category=${encodeURIComponent('Coffee & Tea')}`} className="text-[17px] text-forest underline-offset-4 hover:underline">
               Shop coffee and tea →
             </Link>
-          </div>
+          </Reveal>
         </div>
       </Band>
 
       <Band isTinted>
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="order-2 flex flex-col gap-5 lg:order-1">
+          <Reveal delay={STAGGER_MS * 2} className="order-2 flex flex-col gap-5 lg:order-1">
             <span className="label text-forest">Candles & Scent</span>
             <Headline>Evenings, <span className="accent-word">lit low</span>.</Headline>
             <p className="max-w-[440px] text-[17px] leading-[1.47] text-ink-muted">
@@ -183,14 +223,17 @@ export default function LandingPage() {
             <Link to={`/shop?category=${encodeURIComponent('Candles & Scent')}`} className="text-[17px] text-forest underline-offset-4 hover:underline">
               Shop candles and scent →
             </Link>
-          </div>
-          <LandingMedia image={`${IMAGE_FOLDER}fig-leaf-candle.jpg`} video="" alt="A lit fig leaf candle" className="order-1 aspect-square lg:order-2" />
+          </Reveal>
+          <Reveal className="order-1 lg:order-2">
+            <LandingMedia image={`${IMAGE_FOLDER}fig-leaf-candle.jpg`} clip="candle.gif" alt="A candle flame flickering" className="aspect-square" />
+          </Reveal>
         </div>
       </Band>
 
       <Band>
         <Headline>A closer <span className="accent-word">look</span>.</Headline>
         <div className="mt-12 grid items-start gap-12 lg:grid-cols-[1fr_1.2fr]">
+          <Reveal>
           <ul className="flex flex-col gap-3">
             {CLOSER_LOOK.map((row, index) => {
               const isOpen = openRow === index
@@ -212,18 +255,21 @@ export default function LandingPage() {
               )
             })}
           </ul>
-          <LandingMedia image={`${IMAGE_FOLDER}linen-lampshade.jpg`} alt="A linen lamp on a glass shelf" className="aspect-[4/5]" />
+          </Reveal>
+          <Reveal delay={STAGGER_MS * 2}>
+            <LandingMedia image={`${IMAGE_FOLDER}linen-lampshade.jpg`} alt="A linen lamp on a glass shelf" className="aspect-[4/5]" />
+          </Reveal>
         </div>
       </Band>
 
       <Band isTinted id="categories">
         <Headline>Every room, <span className="accent-word">considered</span>.</Headline>
         <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {Object.entries(CATEGORY_IMAGES).map(([name, image]) => (
+          {Object.entries(CATEGORY_IMAGES).map(([name, image], index) => (
+            <Reveal key={name} delay={(index % 4) * STAGGER_MS}>
             <Link
-              key={name}
               to={`/shop?category=${encodeURIComponent(name)}`}
-              className="group flex flex-col gap-3 rounded-[28px] bg-paper p-4 transition-colors hover:bg-[#fffdf8]"
+              className="group flex h-full flex-col gap-3 rounded-[28px] bg-paper p-4 transition-colors hover:bg-[#fffdf8]"
             >
               <img src={IMAGE_FOLDER + image} alt="" loading="lazy" className="aspect-square w-full rounded-[20px] object-cover" />
               <div className="flex items-center justify-between px-1 pb-1">
@@ -231,6 +277,7 @@ export default function LandingPage() {
                 <span className="text-forest transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
               </div>
             </Link>
+            </Reveal>
           ))}
         </div>
       </Band>
@@ -240,14 +287,14 @@ export default function LandingPage() {
           <Headline size="text-[56px] sm:text-[84px] lg:text-[96px]">
             Your home, <span className="accent-word">slower</span>.
           </Headline>
-          <div className="flex flex-wrap gap-4">
+          <Reveal delay={STAGGER_MS * 2} className="flex flex-wrap gap-4">
             <Link to="/shop" className="btn-primary">Shop the collection</Link>
             {user ? (
               <Link to="/cart" className="btn-neutral">View your cart</Link>
             ) : (
               <Link to="/login" className="btn-neutral">Create an account</Link>
             )}
-          </div>
+          </Reveal>
         </div>
       </Band>
     </div>
