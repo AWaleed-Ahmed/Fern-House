@@ -3,12 +3,15 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Prefix tree (trie) for searching products by name.
  */
+
+
 package store.ds;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import store.model.Product;
+
 
 /**
  * A trie (prefix tree) of product names. Every node is one letter, so all
@@ -19,7 +22,11 @@ import store.model.Product;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class ProductTrie {
+
+
     private final TrieNode root = new TrieNode();
 
     /**
@@ -27,9 +34,15 @@ public class ProductTrie {
      *
      * @param product the product to add
      */
-    public void insert(Product product) {
+
+
+    public void insert
+    (
+        Product product
+    ) {
         TrieNode current = root;
-        for (char letter : product.getName().toLowerCase().toCharArray()) {
+        for (char letter : product.getName().toLowerCase().toCharArray())
+        {
             current = current.getChildren().computeIfAbsent(letter, key -> new TrieNode());
         }
         current.getProducts().add(product);
@@ -42,9 +55,16 @@ public class ProductTrie {
      * @param productId ID of the product to remove
      * @return true if the product was found and removed
      */
-    public boolean remove(String name, int productId) {
+
+
+    public boolean remove
+    (
+        String name,
+        int productId
+    ) {
         TrieNode node = findNode(name.toLowerCase());
-        if (node == null) {
+        if (node == null)
+        {
             return false;
         }
         return node.getProducts().removeIf(product -> product.getId() == productId);
@@ -56,10 +76,16 @@ public class ProductTrie {
      * @param prefix the start of the name, any case; an empty prefix returns all products
      * @return the matching products, empty if none match
      */
-    public List<Product> searchByPrefix(String prefix) {
+
+
+    public List<Product> searchByPrefix
+    (
+        String prefix
+    ) {
         List<Product> results = new ArrayList<>();
         TrieNode start = findNode(prefix.toLowerCase());
-        if (start != null) {
+        if (start != null)
+        {
             collect(start, results);
         }
         return results;
@@ -70,6 +96,8 @@ public class ProductTrie {
      *
      * @return all products
      */
+
+
     public List<Product> getAllSorted() {
         return searchByPrefix("");
     }
@@ -80,11 +108,18 @@ public class ProductTrie {
      * @param text the letters to follow, already lower case
      * @return the node at the end of the text, or null if the path does not exist
      */
-    private TrieNode findNode(String text) {
+
+
+    private TrieNode findNode
+    (
+        String text
+    ) {
         TrieNode current = root;
-        for (char letter : text.toCharArray()) {
+        for (char letter : text.toCharArray())
+        {
             current = current.getChildren().get(letter);
-            if (current == null) {
+            if (current == null)
+            {
                 return null;
             }
         }
@@ -98,10 +133,19 @@ public class ProductTrie {
      * @param node    the node to start from
      * @param results the list the products are added to
      */
-    private void collect(TrieNode node, List<Product> results) {
+
+
+    private void collect
+    (
+        TrieNode node,
+        List<Product> results
+    ) {
         results.addAll(node.getProducts());
-        for (TrieNode child : node.getChildren().values()) {
+        for (TrieNode child : node.getChildren().values())
+        {
             collect(child, results);
         }
     }
 }
+
+

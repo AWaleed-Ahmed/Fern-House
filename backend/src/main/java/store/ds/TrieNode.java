@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: One node (one letter) of the product name trie.
  */
+
+
 package store.ds;
 
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ import java.util.TreeMap;
 
 import store.model.Product;
 
+
 /**
  * A node of the {@link ProductTrie}. Each node stands for one letter.
  * Children are kept in a TreeMap so they are always in A to Z order.
@@ -18,7 +21,11 @@ import store.model.Product;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class TrieNode {
+
+
     private final TreeMap<Character, TrieNode> children = new TreeMap<>();
     private final List<Product> products = new ArrayList<>();
 
@@ -27,6 +34,8 @@ public class TrieNode {
      *
      * @return the children in A to Z order
      */
+
+
     public TreeMap<Character, TrieNode> getChildren() {
         return children;
     }
@@ -36,7 +45,11 @@ public class TrieNode {
      *
      * @return the products stored here
      */
+
+
     public List<Product> getProducts() {
         return products;
     }
 }
+
+

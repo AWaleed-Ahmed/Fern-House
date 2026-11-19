@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Weighted graph of products that were bought together.
  */
+
+
 package store.ds;
 
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 
 /**
  * An undirected weighted graph. Each node is a product ID. An edge between
@@ -20,7 +23,11 @@ import java.util.Set;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class RecommendationGraph {
+
+
     private final HashMap<Integer, HashMap<Integer, Integer>> adjacency = new HashMap<>();
 
     /**
@@ -29,10 +36,18 @@ public class RecommendationGraph {
      *
      * @param productIds IDs of the products in the order
      */
-    public void addOrder(List<Integer> productIds) {
-        for (int first : productIds) {
-            for (int second : productIds) {
-                if (first != second) {
+
+
+    public void addOrder
+    (
+        List<Integer> productIds
+    ) {
+        for (int first : productIds)
+        {
+            for (int second : productIds)
+            {
+                if (first != second)
+                {
                     adjacency.computeIfAbsent(first, key -> new HashMap<>())
                             .merge(second, 1, Integer::sum);
                 }
@@ -47,9 +62,15 @@ public class RecommendationGraph {
      * @param second ID of the other product
      * @return the edge weight, or 0 if there is no edge
      */
-    public int getWeight(int first, int second) {
+
+
+    public int getWeight
+    (
+        int first, int second
+    ) {
         HashMap<Integer, Integer> neighbours = adjacency.get(first);
-        if (neighbours == null) {
+        if (neighbours == null)
+        {
             return 0;
         }
         return neighbours.getOrDefault(second, 0);
@@ -61,7 +82,12 @@ public class RecommendationGraph {
      * @param productId the product ID
      * @return neighbour ID to weight, empty if the product has no edges
      */
-    public Map<Integer, Integer> getNeighbours(int productId) {
+
+
+    public Map<Integer, Integer> getNeighbours
+    (
+        int productId
+    ) {
         return adjacency.getOrDefault(productId, new HashMap<>());
     }
 
@@ -75,11 +101,20 @@ public class RecommendationGraph {
      * @param limit      maximum number of results
      * @return recommended product IDs, best first
      */
-    public List<Integer> recommend(Set<Integer> boughtIds, Set<Integer> excludeIds, int limit) {
+
+
+    public List<Integer> recommend
+    (
+        Set<Integer> boughtIds, Set<Integer> excludeIds,
+        int limit
+    ) {
         HashMap<Integer, Integer> scores = new HashMap<>();
-        for (int bought : boughtIds) {
-            for (Map.Entry<Integer, Integer> edge : getNeighbours(bought).entrySet()) {
-                if (!excludeIds.contains(edge.getKey())) {
+        for (int bought : boughtIds)
+        {
+            for (Map.Entry<Integer, Integer> edge : getNeighbours(bought).entrySet())
+            {
+                if (!excludeIds.contains(edge.getKey()))
+                {
                     scores.merge(edge.getKey(), edge.getValue(), Integer::sum);
                 }
             }
@@ -89,3 +124,5 @@ public class RecommendationGraph {
         return ranked.subList(0, Math.min(limit, ranked.size()));
     }
 }
+
+
