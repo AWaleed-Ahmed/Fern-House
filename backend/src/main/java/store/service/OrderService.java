@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Checkout: turns a cart into an order and reduces stock.
  */
+
+
 package store.service;
 
 import java.lang.reflect.Type;
@@ -21,6 +23,7 @@ import store.model.Product;
 import store.model.StockStatus;
 import store.model.User;
 
+
 /**
  * Handles checkout and order history. Orders are saved in orders.json and
  * fed into the recommendation graph, both at startup and after each checkout.
@@ -28,8 +31,14 @@ import store.model.User;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class OrderService {
+
+
     /** File the orders are saved in. */
+
+
     public static final String ORDERS_FILE = "orders.json";
 
     private static final Type ORDER_LIST_TYPE = new TypeToken<List<Order>>() { }.getType();
@@ -49,14 +58,22 @@ public class OrderService {
      * @param userService           used to save the emptied cart
      * @param recommendationService receives every order
      */
-    public OrderService(JsonStorage storage, ProductService productService,
-            UserService userService, RecommendationService recommendationService) {
+
+
+    public OrderService
+    (
+        JsonStorage storage,
+        ProductService productService,
+        UserService userService,
+        RecommendationService recommendationService
+    ) {
         this.storage = storage;
         this.productService = productService;
         this.userService = userService;
         this.recommendationService = recommendationService;
         this.orders = storage.loadList(ORDERS_FILE, ORDER_LIST_TYPE);
-        for (Order order : orders) {
+        for (Order order : orders)
+        {
             recommendationService.recordOrder(order);
         }
     }
@@ -68,21 +85,30 @@ public class OrderService {
      * @param user the user checking out
      * @return the new order
      */
-    public Order checkout(User user) {
-        if (user.getCart().isEmpty()) {
+
+
+    public Order checkout
+    (
+        User user
+    ) {
+        if (user.getCart().isEmpty())
+        {
             throw new ValidationException("Your cart is empty.");
         }
         double total = 0;
-        for (CartItem item : user.getCart()) {
+        for (CartItem item : user.getCart())
+        {
             Product product = productService.getProduct(item.getProductId());
-            if (product.getStatus() == StockStatus.OUT_OF_STOCK || item.getQuantity() > product.getQuantity()) {
+            if (product.getStatus() == StockStatus.OUT_OF_STOCK || item.getQuantity() > product.getQuantity())
+            {
                 throw new ValidationException("Not enough stock for " + product.getName() + ".");
             }
             total += product.getPrice() * item.getQuantity();
         }
 
         List<CartItem> items = new ArrayList<>();
-        for (CartItem item : user.getCart()) {
+        for (CartItem item : user.getCart())
+        {
             productService.reduceStock(item.getProductId(), item.getQuantity());
             items.add(new CartItem(item.getProductId(), item.getQuantity()));
         }
@@ -104,10 +130,17 @@ public class OrderService {
      * @param user the user
      * @return the user's orders
      */
-    public List<Order> getOrdersFor(User user) {
+
+
+    public List<Order> getOrdersFor
+    (
+        User user
+    ) {
         List<Order> results = new ArrayList<>();
-        for (int i = orders.size() - 1; i >= 0; i--) {
-            if (orders.get(i).getUsername().equalsIgnoreCase(user.getUsername())) {
+        for (int i = orders.size() - 1; i >= 0; i--)
+        {
+            if (orders.get(i).getUsername().equalsIgnoreCase(user.getUsername()))
+            {
                 results.add(orders.get(i));
             }
         }
@@ -119,6 +152,8 @@ public class OrderService {
      *
      * @return all orders
      */
+
+
     public List<Order> getAllOrders() {
         List<Order> results = new ArrayList<>(orders);
         Collections.reverse(results);
@@ -130,11 +165,16 @@ public class OrderService {
      *
      * @return one more than the largest order ID, or 1 if there are none
      */
+
+
     private int nextId() {
         int maxId = 0;
-        for (Order order : orders) {
+        for (Order order : orders)
+        {
             maxId = Math.max(maxId, order.getId());
         }
         return maxId + 1;
     }
 }
+
+

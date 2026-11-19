@@ -3,7 +3,10 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Error thrown when user input is invalid.
  */
+
+
 package store.service;
+
 
 /**
  * Thrown when input is invalid, for example an empty name or a negative
@@ -12,8 +15,14 @@ package store.service;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class ValidationException extends RuntimeException {
+
+
     /** Version number for Java serialization. */
+
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -21,7 +30,14 @@ public class ValidationException extends RuntimeException {
      *
      * @param message what was wrong with the input
      */
-    public ValidationException(String message) {
+
+
+    public ValidationException
+    (
+        String message
+    ) {
         super(message);
     }
 }
+
+

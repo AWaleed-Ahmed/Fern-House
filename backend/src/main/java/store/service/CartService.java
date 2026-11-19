@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Add, update and remove items in a user's cart (a linked list).
  */
+
+
 package store.service;
 
 import java.util.Iterator;
@@ -13,6 +15,7 @@ import store.model.Product;
 import store.model.StockStatus;
 import store.model.User;
 
+
 /**
  * Cart operations. Each user's cart is a LinkedList of {@link CartItem}:
  * new products are added at the end, and items are found by walking the list.
@@ -21,7 +24,11 @@ import store.model.User;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class CartService {
+
+
     private final ProductService productService;
     private final UserService userService;
 
@@ -31,7 +38,13 @@ public class CartService {
      * @param productService used to check products and stock
      * @param userService    used to save carts
      */
-    public CartService(ProductService productService, UserService userService) {
+
+
+    public CartService
+    (
+        ProductService productService,
+        UserService userService
+    ) {
         this.productService = productService;
         this.userService = userService;
     }
@@ -45,15 +58,25 @@ public class CartService {
      * @param quantity  number of units as text, must be at least 1
      * @return the updated cart
      */
-    public LinkedList<CartItem> addToCart(User user, int productId, String quantity) {
+
+
+    public LinkedList<CartItem> addToCart
+    (
+        User user,
+        int productId,
+        String quantity
+    ) {
         int amount = parseAmount(quantity);
         CartItem existing = findItem(user.getCart(), productId);
         int newTotal = amount + (existing == null ? 0 : existing.getQuantity());
         checkStock(productService.getProduct(productId), newTotal);
 
-        if (existing == null) {
+        if (existing == null)
+        {
             user.getCart().addLast(new CartItem(productId, amount));
-        } else {
+        }
+        else
+        {
             existing.setQuantity(newTotal);
         }
         userService.save();
@@ -69,13 +92,22 @@ public class CartService {
      * @param quantity  new number of units as text
      * @return the updated cart
      */
-    public LinkedList<CartItem> updateItem(User user, int productId, String quantity) {
+
+
+    public LinkedList<CartItem> updateItem
+    (
+        User user,
+        int productId,
+        String quantity
+    ) {
         int amount = Validator.parseQuantity(quantity);
-        if (amount == 0) {
+        if (amount == 0)
+        {
             return removeItem(user, productId);
         }
         CartItem existing = findItem(user.getCart(), productId);
-        if (existing == null) {
+        if (existing == null)
+        {
             throw new NotFoundException("That product isn't in your cart.");
         }
         checkStock(productService.getProduct(productId), amount);
@@ -91,10 +123,18 @@ public class CartService {
      * @param productId ID of the product to remove
      * @return the updated cart
      */
-    public LinkedList<CartItem> removeItem(User user, int productId) {
+
+
+    public LinkedList<CartItem> removeItem
+    (
+        User user,
+        int productId
+    ) {
         Iterator<CartItem> iterator = user.getCart().iterator();
-        while (iterator.hasNext()) {
-            if (iterator.next().getProductId() == productId) {
+        while (iterator.hasNext())
+        {
+            if (iterator.next().getProductId() == productId)
+            {
                 iterator.remove();
                 userService.save();
                 return user.getCart();
@@ -108,7 +148,12 @@ public class CartService {
      *
      * @param user the user whose cart it is
      */
-    public void clearCart(User user) {
+
+
+    public void clearCart
+    (
+        User user
+    ) {
         user.getCart().clear();
         userService.save();
     }
@@ -119,9 +164,15 @@ public class CartService {
      * @param user the user whose cart it is
      * @return the total price
      */
-    public double getTotal(User user) {
+
+
+    public double getTotal
+    (
+        User user
+    ) {
         double total = 0;
-        for (CartItem item : user.getCart()) {
+        for (CartItem item : user.getCart())
+        {
             total += productService.getProduct(item.getProductId()).getPrice() * item.getQuantity();
         }
         return total;
@@ -134,9 +185,17 @@ public class CartService {
      * @param productId ID of the product
      * @return the cart item, or null if the product is not in the cart
      */
-    private CartItem findItem(LinkedList<CartItem> cart, int productId) {
-        for (CartItem item : cart) {
-            if (item.getProductId() == productId) {
+
+
+    private CartItem findItem
+    (
+        LinkedList<CartItem> cart,
+        int productId
+    ) {
+        for (CartItem item : cart)
+        {
+            if (item.getProductId() == productId)
+            {
                 return item;
             }
         }
@@ -149,11 +208,19 @@ public class CartService {
      * @param product the product
      * @param wanted  total number of units wanted
      */
-    private void checkStock(Product product, int wanted) {
-        if (product.getStatus() == StockStatus.OUT_OF_STOCK || product.getQuantity() == 0) {
+
+
+    private void checkStock
+    (
+        Product product,
+        int wanted
+    ) {
+        if (product.getStatus() == StockStatus.OUT_OF_STOCK || product.getQuantity() == 0)
+        {
             throw new ValidationException(product.getName() + " is out of stock.");
         }
-        if (wanted > product.getQuantity()) {
+        if (wanted > product.getQuantity())
+        {
             throw new ValidationException("Only " + product.getQuantity() + " of "
                     + product.getName() + " left.");
         }
@@ -165,11 +232,19 @@ public class CartService {
      * @param quantity the amount as text
      * @return the amount
      */
-    private int parseAmount(String quantity) {
+
+
+    private int parseAmount
+    (
+        String quantity
+    ) {
         int amount = Validator.parseQuantity(quantity);
-        if (amount == 0) {
+        if (amount == 0)
+        {
             throw new ValidationException("Quantity must be at least 1.");
         }
         return amount;
     }
 }
+
+

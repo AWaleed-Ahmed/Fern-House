@@ -3,7 +3,10 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Checks and converts input values (names, quantities, prices).
  */
+
+
 package store.service;
+
 
 /**
  * Helper methods that check user input and turn text into numbers.
@@ -13,9 +16,14 @@ package store.service;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public final class Validator {
 
+
     /** Longest name allowed for a product. */
+
+
     public static final int MAX_NAME_LENGTH = 60;
 
     private Validator() {
@@ -28,8 +36,14 @@ public final class Validator {
      * @param fieldName the field name used in the error message, for example "Name"
      * @return the text with spaces trimmed from both ends
      */
-    public static String requireText(String value, String fieldName) {
-        if (value == null || value.trim().isEmpty()) {
+
+
+    public static String requireText
+    (
+        String value, String fieldName
+    ) {
+        if (value == null || value.trim().isEmpty())
+        {
             throw new ValidationException(fieldName + " can't be empty.");
         }
         return value.trim();
@@ -41,9 +55,15 @@ public final class Validator {
      * @param name the name to check
      * @return the trimmed name
      */
-    public static String validateName(String name) {
+
+
+    public static String validateName
+    (
+        String name
+    ) {
         String trimmed = requireText(name, "Name");
-        if (trimmed.length() > MAX_NAME_LENGTH) {
+        if (trimmed.length() > MAX_NAME_LENGTH)
+        {
             throw new ValidationException("Name must be " + MAX_NAME_LENGTH + " characters or fewer.");
         }
         return trimmed;
@@ -55,15 +75,24 @@ public final class Validator {
      * @param text the quantity as typed, for example "12"
      * @return the quantity as a number
      */
-    public static int parseQuantity(String text) {
+
+
+    public static int parseQuantity
+    (
+        String text
+    ) {
         String trimmed = requireText(text, "Quantity");
         int quantity;
-        try {
+        try
+        {
             quantity = Integer.parseInt(trimmed);
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e)
+        {
             throw new ValidationException("Quantity must be a whole number.");
         }
-        if (quantity < 0) {
+        if (quantity < 0)
+        {
             throw new ValidationException("Quantity can't be negative.");
         }
         return quantity;
@@ -75,17 +104,28 @@ public final class Validator {
      * @param text the price as typed, for example "450.50"
      * @return the price as a number
      */
-    public static double parsePrice(String text) {
+
+
+    public static double parsePrice
+    (
+        String text
+    ) {
         String trimmed = requireText(text, "Price");
         double price;
-        try {
+        try
+        {
             price = Double.parseDouble(trimmed);
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e)
+        {
             throw new ValidationException("Price must be a number.");
         }
-        if (price < 0 || Double.isNaN(price) || Double.isInfinite(price)) {
+        if (price < 0 || Double.isNaN(price) || Double.isInfinite(price))
+        {
             throw new ValidationException("Price can't be negative.");
         }
         return price;
     }
 }
+
+

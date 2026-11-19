@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Inventory operations: add, view, search, update, delete and set status.
  */
+
+
 package store.service;
 
 import java.lang.reflect.Type;
@@ -16,6 +18,7 @@ import store.ds.ProductCatalog;
 import store.model.Product;
 import store.model.StockStatus;
 
+
 /**
  * Manages the inventory. Products are kept in a {@link ProductCatalog}
  * (hash table and trie) and saved to products.json after every change.
@@ -23,8 +26,14 @@ import store.model.StockStatus;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class ProductService {
+
+
     /** File the products are saved in. */
+
+
     public static final String PRODUCTS_FILE = "products.json";
 
     private static final Type PRODUCT_LIST_TYPE = new TypeToken<List<Product>>() { }.getType();
@@ -37,10 +46,16 @@ public class ProductService {
      *
      * @param storage the JSON storage to load from and save to
      */
-    public ProductService(JsonStorage storage) {
+
+
+    public ProductService
+    (
+        JsonStorage storage
+    ) {
         this.storage = storage;
         List<Product> saved = storage.loadList(PRODUCTS_FILE, PRODUCT_LIST_TYPE);
-        for (Product product : saved) {
+        for (Product product : saved)
+        {
             catalog.add(product);
         }
     }
@@ -55,7 +70,12 @@ public class ProductService {
      * @param image    image file name or URL, may be empty
      * @return the new product with its ID
      */
-    public Product addProduct(String name, String category, String price, String quantity, String image) {
+
+
+    public Product addProduct
+    (
+        String name, String category, String price, String quantity, String image
+    ) {
         String cleanName = Validator.validateName(name);
         String cleanCategory = Validator.requireText(category, "Category");
         double cleanPrice = Validator.parsePrice(price);
@@ -73,6 +93,8 @@ public class ProductService {
      *
      * @return all products, empty if the inventory is empty
      */
+
+
     public List<Product> getAllProducts() {
         return catalog.getAllSorted();
     }
@@ -83,7 +105,12 @@ public class ProductService {
      * @param prefix the start of the name, any case
      * @return matching products in A to Z order
      */
-    public List<Product> searchProducts(String prefix) {
+
+
+    public List<Product> searchProducts
+    (
+        String prefix
+    ) {
         return catalog.searchByName(prefix == null ? "" : prefix.trim());
     }
 
@@ -93,10 +120,17 @@ public class ProductService {
      * @param category the category name, any case
      * @return the products in that category
      */
-    public List<Product> getByCategory(String category) {
+
+
+    public List<Product> getByCategory
+    (
+        String category
+    ) {
         List<Product> results = new ArrayList<>();
-        for (Product product : catalog.getAllSorted()) {
-            if (product.getCategory().equalsIgnoreCase(category)) {
+        for (Product product : catalog.getAllSorted())
+        {
+            if (product.getCategory().equalsIgnoreCase(category))
+            {
                 results.add(product);
             }
         }
@@ -110,9 +144,15 @@ public class ProductService {
      * @return the product
      * @throws NotFoundException if there is no product with this ID
      */
-    public Product getProduct(int id) {
+
+
+    public Product getProduct
+    (
+        int id
+    ) {
         Product product = catalog.findById(id);
-        if (product == null) {
+        if (product == null)
+        {
             throw new NotFoundException("No product with ID " + id + ".");
         }
         return product;
@@ -124,7 +164,12 @@ public class ProductService {
      * @param id the product ID
      * @return true if the product is in the inventory
      */
-    public boolean hasProduct(int id) {
+
+
+    public boolean hasProduct
+    (
+        int id
+    ) {
         return catalog.findById(id) != null;
     }
 
@@ -140,15 +185,21 @@ public class ProductService {
      * @return the updated product
      * @throws NotFoundException if there is no product with this ID
      */
-    public Product updateProduct(int id, String name, String category, String price,
-            String quantity, String image) {
+
+
+    public Product updateProduct
+    (
+        int id,
+        String name, String category, String price, String quantity, String image
+    ) {
         Product product = getProduct(id);
         String cleanName = Validator.validateName(name);
         String cleanCategory = Validator.requireText(category, "Category");
         double cleanPrice = Validator.parsePrice(price);
         int cleanQuantity = Validator.parseQuantity(quantity);
 
-        if (!product.getName().equals(cleanName)) {
+        if (!product.getName().equals(cleanName))
+        {
             catalog.rename(product, cleanName);
         }
         product.setCategory(cleanCategory);
@@ -167,7 +218,13 @@ public class ProductService {
      * @return the updated product
      * @throws NotFoundException if there is no product with this ID
      */
-    public Product setStatus(int id, StockStatus status) {
+
+
+    public Product setStatus
+    (
+        int id,
+        StockStatus status
+    ) {
         Product product = getProduct(id);
         product.setStatus(status);
         save();
@@ -180,8 +237,14 @@ public class ProductService {
      * @param id ID of the product to delete
      * @throws NotFoundException if there is no product with this ID
      */
-    public void deleteProduct(int id) {
-        if (catalog.remove(id) == null) {
+
+
+    public void deleteProduct
+    (
+        int id
+    ) {
+        if (catalog.remove(id) == null)
+        {
             throw new NotFoundException("No product with ID " + id + ".");
         }
         save();
@@ -193,7 +256,12 @@ public class ProductService {
      * @param id     ID of the product
      * @param amount number of units bought
      */
-    public void reduceStock(int id, int amount) {
+
+
+    public void reduceStock
+    (
+        int id, int amount
+    ) {
         Product product = getProduct(id);
         product.setQuantity(product.getQuantity() - amount);
     }
@@ -201,7 +269,11 @@ public class ProductService {
     /**
      * Saves all products to products.json.
      */
+
+
     public void save() {
         storage.saveList(PRODUCTS_FILE, new ArrayList<>(catalog.getAll()));
     }
 }
+
+

@@ -3,6 +3,8 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Suggests products to a user based on what they have bought.
  */
+
+
 package store.service;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import store.model.Product;
 import store.model.StockStatus;
 import store.model.User;
 
+
 /**
  * Per-user recommendations. Every order adds edges to one shared
  * {@link RecommendationGraph} ("bought together"). A user's suggestions are
@@ -28,8 +31,14 @@ import store.model.User;
  * @author Abdullah Waleed Ahmed
  * @author Rehan Haider
  */
+
+
 public class RecommendationService {
+
+
     /** Default number of recommendations to return. */
+
+
     public static final int DEFAULT_LIMIT = 4;
 
     private final ProductService productService;
@@ -41,7 +50,12 @@ public class RecommendationService {
      *
      * @param productService used to look up products
      */
-    public RecommendationService(ProductService productService) {
+
+
+    public RecommendationService
+    (
+        ProductService productService
+    ) {
         this.productService = productService;
     }
 
@@ -50,9 +64,15 @@ public class RecommendationService {
      *
      * @param order the finished order
      */
-    public void recordOrder(Order order) {
+
+
+    public void recordOrder
+    (
+        Order order
+    ) {
         List<Integer> ids = new ArrayList<>();
-        for (CartItem item : order.getItems()) {
+        for (CartItem item : order.getItems())
+        {
             ids.add(item.getProductId());
         }
         graph.addOrder(ids);
@@ -66,32 +86,46 @@ public class RecommendationService {
      * @param limit maximum number of products
      * @return recommended products, best first; never products already bought or in the cart
      */
-    public List<Product> recommendFor(User user, int limit) {
+
+
+    public List<Product> recommendFor
+    (
+        User user,
+        int limit
+    ) {
         Set<Integer> bought = boughtByUser.getOrDefault(user.getUsername().toLowerCase(), new HashSet<>());
         Set<Integer> exclude = new HashSet<>(bought);
-        for (CartItem item : user.getCart()) {
+        for (CartItem item : user.getCart())
+        {
             exclude.add(item.getProductId());
         }
 
         List<Product> results = new ArrayList<>();
-        for (int id : graph.recommend(bought, exclude, limit)) {
+        for (int id : graph.recommend(bought, exclude, limit))
+        {
             addIfAvailable(results, exclude, id);
         }
 
         Set<String> categories = new HashSet<>();
-        for (int id : exclude) {
+        for (int id : exclude)
+        {
             categories.add(safeCategory(id));
         }
-        for (Product product : productService.getAllProducts()) {
-            if (results.size() >= limit) {
+        for (Product product : productService.getAllProducts())
+        {
+            if (results.size() >= limit)
+            {
                 break;
             }
-            if (categories.contains(product.getCategory())) {
+            if (categories.contains(product.getCategory()))
+            {
                 addIfAvailable(results, exclude, product.getId());
             }
         }
-        for (Product product : productService.getAllProducts()) {
-            if (results.size() >= limit) {
+        for (Product product : productService.getAllProducts())
+        {
+            if (results.size() >= limit)
+            {
                 break;
             }
             addIfAvailable(results, exclude, product.getId());
@@ -104,6 +138,8 @@ public class RecommendationService {
      *
      * @return the recommendation graph
      */
+
+
     public RecommendationGraph getGraph() {
         return graph;
     }
@@ -117,12 +153,21 @@ public class RecommendationService {
      * @param exclude IDs to skip (bought or in the cart)
      * @param id      the product ID
      */
-    private void addIfAvailable(List<Product> results, Set<Integer> exclude, int id) {
-        if (exclude.contains(id) || !productService.hasProduct(id)) {
+
+
+    private void addIfAvailable
+    (
+        List<Product> results,
+        Set<Integer> exclude,
+        int id
+    ) {
+        if (exclude.contains(id) || !productService.hasProduct(id))
+        {
             return;
         }
         Product product = productService.getProduct(id);
-        if (!results.contains(product) && product.getStatus() != StockStatus.OUT_OF_STOCK) {
+        if (!results.contains(product) && product.getStatus() != StockStatus.OUT_OF_STOCK)
+        {
             results.add(product);
         }
     }
@@ -133,10 +178,18 @@ public class RecommendationService {
      * @param id the product ID
      * @return the category
      */
-    private String safeCategory(int id) {
-        if (!productService.hasProduct(id)) {
+
+
+    private String safeCategory
+    (
+        int id
+    ) {
+        if (!productService.hasProduct(id))
+        {
             return "";
         }
         return productService.getProduct(id).getCategory();
     }
 }
+
+
