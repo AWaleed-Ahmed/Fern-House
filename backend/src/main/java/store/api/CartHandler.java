@@ -144,5 +144,3 @@ public class CartHandler extends ApiHandler {
         return result;
     }
 }
-
-

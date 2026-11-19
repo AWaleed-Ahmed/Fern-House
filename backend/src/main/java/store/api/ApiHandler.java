@@ -386,5 +386,3 @@ public abstract class ApiHandler implements HttpHandler {
         return trimmed.isEmpty() ? new String[0] : trimmed.split("/+");
     }
 }
-
-

@@ -106,5 +106,3 @@ public class ProductHandler extends ApiHandler {
         }
     }
 }
-
-

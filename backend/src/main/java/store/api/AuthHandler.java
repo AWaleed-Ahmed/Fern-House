@@ -128,5 +128,3 @@ public class AuthHandler extends ApiHandler {
         return result;
     }
 }
-
-

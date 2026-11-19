@@ -132,5 +132,3 @@ public class AdminHandler extends ApiHandler {
         }
     }
 }
-
-
