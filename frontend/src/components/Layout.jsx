@@ -3,7 +3,7 @@
  * Authors: Abdullah Waleed Ahmed, Rehan Haider
  * Purpose: Page frame: announcement bar, header with navigation, and footer.
  */
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext.jsx'
 import { STORE_NAME, STORE_TAGLINE } from '../Config.js'
 
@@ -26,6 +26,7 @@ function navClass({ isActive }) {
 export default function Layout() {
   const { user, cartCount, logout } = useAuth()
   const navigate = useNavigate()
+  const isLanding = useLocation().pathname === '/'
 
   /**
    * Logs out and goes back to the home page.
@@ -65,9 +66,15 @@ export default function Layout() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-10 sm:px-8">
-        <Outlet />
-      </main>
+      {isLanding ? (
+        <main className="flex-1">
+          <Outlet />
+        </main>
+      ) : (
+        <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-10 sm:px-8">
+          <Outlet />
+        </main>
+      )}
 
       <footer className="bg-night text-[#cfd8d2]">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 px-4 py-10 sm:px-8">
