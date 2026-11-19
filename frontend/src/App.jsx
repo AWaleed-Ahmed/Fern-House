@@ -8,10 +8,11 @@ import { AuthProvider } from './AuthContext.jsx'
 import Layout from './components/Layout.jsx'
 import AdminPage from './pages/AdminPage.jsx'
 import CartPage from './pages/CartPage.jsx'
-import HomePage from './pages/HomePage.jsx'
+import LandingPage from './pages/LandingPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import OrdersPage from './pages/OrdersPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
+import ShopPage from './pages/ShopPage.jsx'
 
 /**
  * The whole app: login state, router and pages.
@@ -24,7 +25,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/orders" element={<OrdersPage />} />
