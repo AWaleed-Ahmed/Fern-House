@@ -1,0 +1,95 @@
+/*
+ * File:    Theme.css
+ * Authors: Abdullah Waleed Ahmed, Rehan Haider
+ * Purpose: Tailwind setup and the Forest ink theme tokens (colours, fonts, radii).
+ */
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #2f5d50;
+  --color-forest-soft: #e3ebe5;
+  --color-ink: #1f2421;
+  --color-ink-muted: #5d655f;
+  --color-paper: #fbf8f1;
+  --color-card: #efeae0;
+  --color-night: #16201c;
+  --color-amber: #9a6b12;
+  --color-danger: #a3352b;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-card: 25px;
+  --radius-link: 3.75px;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    letter-spacing: 0.013em;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-feature-settings: "clig" on, "liga" on;
+    letter-spacing: -0.005em;
+  }
+}
+
+@layer components {
+  /* Outlined action: the only button style in the system. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid var(--color-forest);
+    border-radius: 999px;
+    padding: 10px 20px;
+    color: var(--color-forest);
+    font-size: 15px;
+    transition: background-color 150ms;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: var(--color-forest-soft);
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-danger {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+  }
+  .btn-danger:hover {
+    background: #f5e4e1;
+  }
+  .field {
+    width: 100%;
+    border: 1px solid #cfc8b9;
+    background: #fffdf8;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 15px;
+    color: var(--color-ink);
+    outline: none;
+  }
+  .field:focus {
+    border-color: var(--color-forest);
+    box-shadow: 0 0 0 3px var(--color-forest-soft);
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
