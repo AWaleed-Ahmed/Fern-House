@@ -84,9 +84,6 @@ export default function Layout() {
             <Link to="/cart" className="hover:text-white">Cart</Link>
             <Link to="/orders" className="hover:text-white">Orders</Link>
           </div>
-          <span className="label w-full text-[#8fa197]">
-            Built by Abdullah Waleed Ahmed and Rehan Haider · Software Construction OEL
-          </span>
         </div>
       </footer>
     </div>
