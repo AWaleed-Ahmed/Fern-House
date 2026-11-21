@@ -18,7 +18,7 @@
   <img src="assets/readme/landing.jpg" alt="Fernhouse landing page" width="900">
 </p>
 
-**Fernhouse** is an inventory management system and online homeware store, built for the Software Construction Open Ended Lab. The Java backend keeps the stock, accounts, carts and orders, and a React website lets customers shop and lets the admin manage the inventory.
+**Fernhouse** is an inventory management system and online homeware store. The Java backend keeps the stock, accounts, carts and orders, and a React website lets customers shop and lets the admin manage the inventory.
 
 ## Contents
 
