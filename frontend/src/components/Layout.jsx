@@ -42,11 +42,8 @@ export default function Layout() {
 
       <header className="border-b border-forest">
         <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 px-4 py-5 sm:px-8">
-          <Link to="/" className="flex items-center gap-2 text-forest">
-            <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
-              <path d="M13 2 C6 8 6 18 13 24 C20 18 20 8 13 2 Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M13 6 V24 M13 12 L9 9 M13 16 L17 13 M13 20 L9 17" stroke="currentColor" strokeWidth="1.2" />
-            </svg>
+          <Link to="/" className="flex items-center gap-3 text-forest">
+            <img src="/logo-mark.png" alt="" aria-hidden="true" className="h-9 w-auto" />
             <span className="text-[20px] uppercase tracking-[0.12em]">{STORE_NAME}</span>
           </Link>
 
